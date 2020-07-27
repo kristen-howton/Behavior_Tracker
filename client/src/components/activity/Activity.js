@@ -21,6 +21,8 @@ const Activity = ({ activity }) => {
                 <div className="name">{activity.activityName}</div>
                 {activity.userProfileId === currentUserId ? (
                     <div>
+                        <Button color="secondary" size="sm" className="ml-2" outline onClick={() => { deleteModalToggle() }}>Details</Button>
+                        <Button color="success" size="sm" className="ml-2" outline onClick={() => { deleteModalToggle() }}>Record</Button>
                         <Button color="info" size="sm" className="ml-2" outline onClick={() => { editModalToggle() }}>Edit</Button>
                         <Button color="danger" size="sm" className="ml-2" outline onClick={() => { deleteModalToggle() }}>Delete</Button>
                     </div>

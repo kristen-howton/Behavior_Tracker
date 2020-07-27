@@ -4,7 +4,7 @@ import { ActivityContext } from "../../providers/ActivityProvider";
 
 const ActivityDeleteModal = ({ toggle, activity }) => {
 
-    const { getActivitiesByUser, deleteActivity } = useContext(ActivityContext);
+    const { getActivityByUserProfile, deleteActivity } = useContext(ActivityContext);
 
 
 
@@ -12,7 +12,7 @@ const ActivityDeleteModal = ({ toggle, activity }) => {
     const submitForm = (e) => {
         e.preventDefault();
         deleteActivity(activity.id)
-            .then(() => getActivitiesByUser())
+            .then(() => getActivityByUserProfile())
             .then(toggle)
             .catch((err) => alert(`An error ocurred: ${err.message}`));
     };

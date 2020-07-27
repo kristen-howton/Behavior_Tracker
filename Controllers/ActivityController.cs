@@ -30,17 +30,6 @@ namespace BehaviorReport.Controllers
 
         }
 
-        //[HttpGet("byuser/{id}")]
-        //public IActionResult Get(int id)
-        //{
-        //    var activity = _activityRepository.GetActivitiesByUserProfile(id);
-        //    if (activity == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    return Ok(activity);
-        //}
-
         [HttpGet("{id}")]
         public IActionResult GetActivity(int id)
         {
@@ -71,6 +60,8 @@ namespace BehaviorReport.Controllers
         [HttpPut("{id}")]
         public IActionResult Put(int id, Activity activity)
         {
+            var currentUserProfile = GetCurrentUserProfile();
+            activity.UserProfileId = currentUserProfile.Id;
             if (id != activity.Id)
             {
                 return BadRequest();

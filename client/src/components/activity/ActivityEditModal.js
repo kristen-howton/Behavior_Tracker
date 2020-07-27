@@ -1,7 +1,7 @@
 import React, { useContext, useRef } from "react";
-import { Form, FormGroup, Label, Input, Button, InputGroup } from "reactstrap"
-import { useParams } from "react-router-dom";
+import { Form, FormGroup, Label, Input, Button, InputGroup } from "reactstrap";
 import { ActivityContext } from "../../providers/ActivityProvider";
+import { useParams } from "react-router-dom";
 
 const ActivityEditModal = ({ toggle, activity }) => {
 
@@ -9,21 +9,22 @@ const ActivityEditModal = ({ toggle, activity }) => {
 
     const activityName = useRef();
     const activityUrl = useRef();
-    const { id } = useParams();
+    //const { id } = useParams();
+
 
     const submitForm = (e) => {
         e.preventDefault();
         editActivity(
             activity.id,
             {
-
+                //userProfileId: parseInt(id),
                 id: activity.id,
                 activityName: activityName.current.value,
                 activityUrl: activityUrl.current.value,
                 isDeleted: false
 
             })
-            .then(() => getActivityByUserProfile(id))
+            .then(() => getActivityByUserProfile())
             .then(toggle)
             .catch((err) => alert(`An error ocurred: ${err.message}`));
     };

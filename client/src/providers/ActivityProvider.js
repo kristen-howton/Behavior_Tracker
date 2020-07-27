@@ -76,10 +76,10 @@ export const ActivityProvider = (props) => {
             fetch(`${apiUrl}/${id}`, {
                 method: "DELETE",
                 headers: {
-                    Authorization: `Bearer ${token}`
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json"
                 }
-            }).then(resp => resp.json())
-        );
+            }));
     };
 
     return (
