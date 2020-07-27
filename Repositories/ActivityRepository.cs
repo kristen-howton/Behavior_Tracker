@@ -16,11 +16,11 @@ namespace BehaviorReport.Repositories
         {
             _context = context;
         }
+
         public Activity GetActivityById(int id)
         {
             return _context.Activity
-                            .Include(c => c.UserProfile)
-                            .FirstOrDefault(c => c.Id == id);
+                            .FirstOrDefault(a => a.Id == id);
         }
         public List<Activity> GetAllActivities()
         {

@@ -30,21 +30,21 @@ namespace BehaviorReport.Controllers
 
         }
 
-        [HttpGet("getactivity/{id}")]
-        public IActionResult GetComment(int id)
-        {
-            return Ok(_activityRepository.GetActivityById(id));
-        }
+        //[HttpGet("byuser/{id}")]
+        //public IActionResult Get(int id)
+        //{
+        //    var activity = _activityRepository.GetActivitiesByUserProfile(id);
+        //    if (activity == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return Ok(activity);
+        //}
 
         [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        public IActionResult GetActivity(int id)
         {
-            var activity = _activityRepository.GetActivityById(id);
-            if (activity == null)
-            {
-                return NotFound();
-            }
-            return Ok(activity);
+            return Ok(_activityRepository.GetActivityById(id));
         }
 
         [HttpGet]
@@ -53,10 +53,11 @@ namespace BehaviorReport.Controllers
             return Ok(_activityRepository.GetAllActivities());
         }
 
-        [HttpGet("getactivitiesbyuser/{id}")]
-        public IActionResult GetByUserProfile(int id)
+        [HttpGet("byuser")]
+        public IActionResult GetByUserProfile()
         {
-            return Ok(_activityRepository.GetActivitiesByUserProfile(id));
+            var currentUserProfile = GetCurrentUserProfile();
+            return Ok(_activityRepository.GetActivitiesByUserProfile(currentUserProfile.Id));
         }
 
         [HttpPost]

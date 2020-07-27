@@ -5,9 +5,20 @@ export const ActivityContext = React.createContext();
 
 export const ActivityProvider = (props) => {
     const { getToken } = useContext(UserProfileContext)
-    const [activties, setActivities] = useState([]);
+    const [activities, setActivities] = useState([]);
 
     const apiUrl = '/api/activity'
+
+    const getActivity = (id) => {
+        return getToken().then((token) =>
+            fetch(`${apiUrl}/${id}`, {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }).then(resp => resp.json())
+                .then(setActivities));
+    };
 
     const getAllActivities = () => {
         getToken().then((token) =>
@@ -32,14 +43,14 @@ export const ActivityProvider = (props) => {
             }).then(resp => {
                 if (resp.ok) {
                     return resp.json();
-                } else
-                    throw new Error("Unauthorized");
+                }
+                throw new Error("Unauthorized");
             }));
     };
 
-    const getActivityByUserProfile = (id) => {
-        getToken().then((token) =>
-            fetch(`apiUrl/getactivitiesbyuser/${id}`, {
+    const getActivityByUserProfile = () => {
+        return getToken().then((token) =>
+            fetch(`${apiUrl}/byuser`, {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${token}`
@@ -61,21 +72,21 @@ export const ActivityProvider = (props) => {
     };
 
     const deleteActivity = (id) => {
-        getToken().then((token) =>
-            fetch(`apiUrl/${id}`, {
+        return getToken().then((token) =>
+            fetch(`${apiUrl}/${id}`, {
                 method: "DELETE",
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
             }).then(resp => resp.json())
-                .then(setActivities));
+        );
     };
 
     return (
         <ActivityContext.Provider value={{
-            activties, getAllActivities, addActivity,
+            activities, getAllActivities, addActivity,
             getActivityByUserProfile, deleteActivity,
-            editActivity
+            editActivity, getActivity
         }}>
             {props.children}
         </ActivityContext.Provider>
