@@ -14,70 +14,68 @@ namespace BehaviorReport.Controllers
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class BehaviorController : ControllerBase
+    public class LearnerController : ControllerBase
     {
-        private readonly BehaviorRepository _behaviorRepository;
+        private readonly LearnerRepository _learnerRepository;
 
         private readonly UserProfileRepository _userProfileRepository;
-
-
-        //using context instead of config
-        public BehaviorController(ApplicationDbContext context)
+        public LearnerController(ApplicationDbContext context)
         {
-            _behaviorRepository = new BehaviorRepository(context);
+            _learnerRepository = new LearnerRepository(context);
             _userProfileRepository = new UserProfileRepository(context);
 
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetBehavior(int id)
+        public IActionResult GetLearner(int id)
         {
-            return Ok(_behaviorRepository.GetBehaviorById(id));
+            return Ok(_learnerRepository.GetLearnerById(id));
         }
 
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok(_behaviorRepository.GetAllBehaviors());
+            return Ok(_learnerRepository.GetAllLeaners());
         }
 
         [HttpGet("byuser")]
         public IActionResult GetByUserProfile()
         {
             var currentUserProfile = GetCurrentUserProfile();
-            return Ok(_behaviorRepository.GetAllBehaviorsByLearner(currentUserProfile.Id));
+            return Ok(_learnerRepository.GetLearnerByUserProfile(currentUserProfile.Id));
         }
 
         [HttpPost]
-        public IActionResult Behavior(Behavior behavior)
+        public IActionResult Learner(Learner learner)
         {
             var currentUserProfile = GetCurrentUserProfile();
-            behavior.LearnerId = currentUserProfile.Id;
-            _behaviorRepository.Add(behavior);
-            return CreatedAtAction(nameof(Get), new { id = behavior.Id }, behavior);
+            learner.UserProfileId = currentUserProfile.Id;
+            _learnerRepository.Add(learner);
+            return CreatedAtAction(nameof(Get), new { id = learner.Id }, learner);
         }
         [HttpPut("{id}")]
-        public IActionResult Put(int id, Behavior behavior)
+        public IActionResult Put(int id, Learner learner)
         {
-            if (id != behavior.Id)
+            if (id != learner.Id)
             {
                 return BadRequest();
             }
 
-            _behaviorRepository.Update(behavior);
+            _learnerRepository.Update(learner);
             return NoContent();
         }
 
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            _behaviorRepository.Delete(id);
+            _learnerRepository.Delete(id);
             return NoContent();
         }
         private UserProfile GetCurrentUserProfile()
         {
             var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            return _userProfileRepository.GetByFirebaseUserId(firebaseUserId);
+            return _userProfileRepository.GetByFirebaseUserId(firebaseUserId); 
         }
+
     }
 }
