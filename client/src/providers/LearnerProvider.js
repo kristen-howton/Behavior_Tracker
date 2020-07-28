@@ -79,7 +79,7 @@ export const LearnerProvider = (props) => {
                     Authorization: `Bearer ${token}`,
                     "Content-Type": "application/json"
                 }
-            })).then(getBehaviorsByLearner);
+            })).then(getLeanersByUserProfile);
     };
 
     return (

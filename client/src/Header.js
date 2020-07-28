@@ -33,6 +33,11 @@ export default function Header() {
                                     <NavLink tag={RRNavLink} to="/add">Add Activity</NavLink>
                                 </NavItem>
 
+                                <NavItem>
+                                    <NavLink tag={RRNavLink} to="/learner">Add Learner</NavLink>
+                                </NavItem>
+
+
                             </>
                         }
                         {!isLoggedIn &&

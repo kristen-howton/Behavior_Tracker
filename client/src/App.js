@@ -5,14 +5,17 @@ import { UserProfileProvider } from "./providers/UserProfileProvider";
 import ApplicationViews from "./components/ApplicationViews";
 import { ActivityProvider } from './providers/ActivityProvider';
 import Header from './Header';
+import { LearnerProvider } from './providers/LearnerProvider';
 
 function App() {
   return (
     <Router>
       <UserProfileProvider>
         <ActivityProvider>
-          <Header />
-          <ApplicationViews />
+          <LearnerProvider>
+            <Header />
+            <ApplicationViews />
+          </LearnerProvider>
         </ActivityProvider>
       </UserProfileProvider>
     </Router>
