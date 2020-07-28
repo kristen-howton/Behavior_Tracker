@@ -1,6 +1,6 @@
 
 import React, { useState } from "react";
-import { Button, Modal, ModalBody, ModalHeader } from "reactstrap"
+import { Button, Modal, ModalBody, ModalHeader, Card, CardBody, Media } from "reactstrap"
 import ActivityEditModal from "./ActivityEditModal";
 import ActivityDeleteModal from "./ActivityDeleteModal";
 
@@ -13,23 +13,20 @@ const Activity = ({ activity }) => {
     const [deleteModal, setDeleteModal] = useState(false)
     const deleteModalToggle = () => setDeleteModal(!deleteModal)
 
-
-
     return (
         <>
-            <h4 className="d-flex justify-content-between">
-                <div className="name">{activity.activityName}</div>
+            <Card className="d-flex justify-content-between">
+                <CardBody className="name">{activity.activityName}</CardBody>
+                <Media object src={activity.imageUrl} className="imageSize" />
                 {activity.userProfileId === currentUserId ? (
                     <div>
-                        <Button color="secondary" size="sm" className="ml-2" outline onClick={() => { deleteModalToggle() }}>Details</Button>
-                        <Button color="success" size="sm" className="ml-2" outline onClick={() => { deleteModalToggle() }}>Record</Button>
+                        <Button color="secondary" size="sm" className="ml-2" outline onClick={() => { editModalToggle() }}>Details</Button>
+                        <Button color="success" size="sm" className="ml-2" outline onClick={() => { editModalToggle() }}>Record</Button >
                         <Button color="info" size="sm" className="ml-2" outline onClick={() => { editModalToggle() }}>Edit</Button>
                         <Button color="danger" size="sm" className="ml-2" outline onClick={() => { deleteModalToggle() }}>Delete</Button>
                     </div>
                 ) : ""}
-            </h4>
-
-
+            </Card>
 
             <hr className="dotted" />
 
@@ -56,8 +53,6 @@ const Activity = ({ activity }) => {
                     </>) : (<></>)
 
             }
-
-
         </>
 
     );

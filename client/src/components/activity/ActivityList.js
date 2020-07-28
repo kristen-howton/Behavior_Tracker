@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { ListGroup, ListGroupItem } from "reactstrap"
 import { ActivityContext } from "../../providers/ActivityProvider";
 import Activity from "./Activity";
@@ -6,9 +6,6 @@ import Activity from "./Activity";
 
 const ActivityList = () => {
     const { activities, getActivityByUserProfile } = useContext(ActivityContext);
-
-
-
 
     useEffect(() => {
         getActivityByUserProfile()
@@ -22,8 +19,8 @@ const ActivityList = () => {
             <ListGroup>
                 {
                     (activities.length)
-                        ? activities.map((activity, index) => (
-                            <ListGroupItem key={activity.id} className={index % 2 === 0 ? "" : "bg-light"}>
+                        ? activities.map((activity) => (
+                            <ListGroupItem key={activity.id}>
                                 <Activity activity={activity} />
                             </ListGroupItem>
 

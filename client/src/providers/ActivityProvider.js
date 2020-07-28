@@ -68,7 +68,7 @@ export const ActivityProvider = (props) => {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify(activity)
-            }));
+            })).then(getActivityByUserProfile);
     };
 
     const deleteActivity = (id) => {
@@ -79,7 +79,7 @@ export const ActivityProvider = (props) => {
                     Authorization: `Bearer ${token}`,
                     "Content-Type": "application/json"
                 }
-            }));
+            })).then(getActivityByUserProfile);
     };
 
     return (

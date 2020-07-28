@@ -60,8 +60,6 @@ namespace BehaviorReport.Controllers
         [HttpPut("{id}")]
         public IActionResult Put(int id, Activity activity)
         {
-            var currentUserProfile = GetCurrentUserProfile();
-            activity.UserProfileId = currentUserProfile.Id;
             if (id != activity.Id)
             {
                 return BadRequest();

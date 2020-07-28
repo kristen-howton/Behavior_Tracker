@@ -1,30 +1,26 @@
 import React, { useContext, useRef } from "react";
 import { Form, FormGroup, Label, Input, Button, InputGroup } from "reactstrap";
 import { ActivityContext } from "../../providers/ActivityProvider";
-import { useParams } from "react-router-dom";
 
 const ActivityEditModal = ({ toggle, activity }) => {
 
-    const { getActivityByUserProfile, editActivity } = useContext(ActivityContext);
+    const { editActivity } = useContext(ActivityContext);
 
     const activityName = useRef();
-    const activityUrl = useRef();
-    //const { id } = useParams();
-
+    const imageUrl = useRef();
 
     const submitForm = (e) => {
         e.preventDefault();
         editActivity(
             activity.id,
             {
-                //userProfileId: parseInt(id),
+                userProfileId: activity.userProfileId,
                 id: activity.id,
                 activityName: activityName.current.value,
-                activityUrl: activityUrl.current.value,
+                imageUrl: imageUrl.current.value,
                 isDeleted: false
 
             })
-            .then(() => getActivityByUserProfile())
             .then(toggle)
             .catch((err) => alert(`An error ocurred: ${err.message}`));
     };
@@ -39,10 +35,9 @@ const ActivityEditModal = ({ toggle, activity }) => {
             <FormGroup>
                 <Label for="imageUpload">Activity Image</Label>
                 <InputGroup className="mt-2">
-                    <Input type='text' name='activityUrl' id='activityUrl' innerRef={activityUrl} placeholder="http://myImageUrl" />
+                    <Input type='text' name='activityUrl' id='activityUrl' innerRef={imageUrl} defaultValue={activity.imageUrl} />
                 </InputGroup>
             </FormGroup>
-
 
             <FormGroup className="text-right">
                 <Button
