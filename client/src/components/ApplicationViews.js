@@ -4,6 +4,7 @@ import { UserProfileContext } from "../providers/UserProfileProvider";
 import Login from "./Login";
 import Register from "./Register";
 import AddActivityForm from "./activity/AddActivityForm";
+import ActivityList from "./activity/ActivityList";
 
 
 export default function ApplicationViews() {
@@ -14,6 +15,10 @@ export default function ApplicationViews() {
             <Switch>
 
                 <Route path="/" exact>
+                    {isLoggedIn ? <ActivityList /> : <Redirect to="/login" />}
+                </Route>
+
+                <Route path="/add" exact>
                     {isLoggedIn ? <AddActivityForm /> : <Redirect to="/login" />}
                 </Route>
 

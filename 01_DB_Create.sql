@@ -34,7 +34,7 @@ CREATE TABLE [Activity] (
   [Id] integer PRIMARY KEY IDENTITY,
   [UserProfileId] integer NOT NULL,
   [ActivityName] varchar(50) NOT NULL,
-  [ImageUrl] nvarchar(255) NOT NULL,
+  [ImageUrl] nvarchar(500) NOT NULL,
   [IsDeleted] bit NOT NULL,
 
 CONSTRAINT [FK_Activity_UserProfile] FOREIGN KEY ([UserProfileId]) REFERENCES [UserProfile] ([id])

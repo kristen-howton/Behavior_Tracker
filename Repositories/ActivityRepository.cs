@@ -16,15 +16,17 @@ namespace BehaviorReport.Repositories
         {
             _context = context;
         }
+
         public Activity GetActivityById(int id)
         {
             return _context.Activity
-                            .Include(c => c.UserProfile)
-                            .FirstOrDefault(c => c.Id == id);
+                            .Where(a => !a.IsDeleted)
+                            .FirstOrDefault(a => a.Id == id);
         }
         public List<Activity> GetAllActivities()
         {
             return _context.Activity
+                            .Where(a => !a.IsDeleted)
                             .Include(a => a.UserProfile)
                             .ToList();
         }
@@ -33,6 +35,7 @@ namespace BehaviorReport.Repositories
         {
             return _context.Activity
                             .Include(a => a.UserProfile)
+                            .Where(a => !a.IsDeleted)
                             .Where(a => a.UserProfileId == id)
                             .ToList();
         }
@@ -52,7 +55,8 @@ namespace BehaviorReport.Repositories
         public void Delete(int id)
         {
             var activity = GetActivityById(id);
-            _context.Activity.Remove(activity);
+            activity.IsDeleted = true;
+            _context.Entry(activity).State = EntityState.Modified;
             _context.SaveChanges();
         }
     }

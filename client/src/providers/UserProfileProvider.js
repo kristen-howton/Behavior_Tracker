@@ -13,7 +13,7 @@ export function UserProfileProvider(props) {
     const [isFirebaseReady, setIsFirebaseReady] = useState(false);
     const [users, setUsers] = useState([])
     const [user, setUser] = useState({})
-    const [currentUser, setCurrentUser] = useState(null)
+    const [currentUser] = useState(null)
 
     useEffect(() => {
         firebase.auth().onAuthStateChanged((u) => {

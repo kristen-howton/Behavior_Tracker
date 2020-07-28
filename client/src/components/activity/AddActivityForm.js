@@ -2,12 +2,10 @@ import React, { useContext, useRef } from 'react'
 import { Form, FormGroup, Input, Button, Label, InputGroup } from 'reactstrap'
 import { useHistory } from "react-router-dom";
 import { ActivityContext } from '../../providers/ActivityProvider';
-import { UserProfileContext } from '../../providers/UserProfileProvider';
 
 
 const AddActivityForm = () => {
     const { addActivity } = useContext(ActivityContext)
-    const { getUserProfile } = useContext(UserProfileContext)
 
     const history = useHistory();
 
@@ -15,18 +13,16 @@ const AddActivityForm = () => {
     const imageUrl = useRef()
 
     const handleSubmit = (event) => {
-        getUserProfile().then(user => {
-            const Activity = {
-                activityName: activityName.current.value,
-                imageUrl: imageUrl.current.value,
-                isDeleted: false,
-                userProfileId: user.id
-            }
 
 
-            addActivity(Activity)
-                .then(history.push('/activity'));
-        })
+        const Activity = {
+            activityName: activityName.current.value,
+            imageUrl: imageUrl.current.value,
+            isDeleted: false
+        }
+
+        addActivity(Activity)
+            .then(history.push('/activity'));
     }
     return (
         <div className="d-flex justify-content-center">
@@ -42,7 +38,7 @@ const AddActivityForm = () => {
                     <FormGroup>
                         <Label for="imageUpload">Activity Image</Label>
                         <InputGroup className="mt-2">
-                            <Input type='text' name='imageUrl' id='imageUrl' innerRef={imageUrl} placeholder="http://myImageUrl" />
+                            <Input type='text' name='imageUrl' id='imageUrl' innerRef={imageUrl} placeholder="http://ImageUrl" />
                         </InputGroup>
                     </FormGroup>
 

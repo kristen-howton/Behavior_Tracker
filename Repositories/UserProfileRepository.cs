@@ -18,6 +18,8 @@ namespace BehaviorReport.Repositories
 
         public UserProfile GetByFirebaseUserId(string firebaseUserId)
         {
+            Console.WriteLine($"'{firebaseUserId}'");
+
             return _context.UserProfile
                 .FirstOrDefault(up => up.FirebaseUserId == firebaseUserId);
         }
