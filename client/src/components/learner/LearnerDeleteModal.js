@@ -2,14 +2,14 @@ import React, { useContext } from "react";
 import { Button, Form } from 'reactstrap';
 import { LearnerContext } from "../../providers/LearnerProvider";
 
-const LearnerDeleteModal = ({ toggle, learner }) => {
+const LearnerDeleteModal = ({ toggleDelete, learner }) => {
 
     const { deleteLearner } = useContext(LearnerContext);
 
     const submitForm = (e) => {
         e.preventDefault();
         deleteLearner(learner.id)
-            .then(toggle)
+            .then(toggleDelete)
             .catch((err) => alert(`An error ocurred: ${err.message}`));
     };
 
@@ -21,7 +21,7 @@ const LearnerDeleteModal = ({ toggle, learner }) => {
                     <Button
                         type="button"
                         color="secondary"
-                        onClick={toggle}
+                        onClick={toggleDelete}
                     >Cancel</Button>
                     <Button
                         type="submit"

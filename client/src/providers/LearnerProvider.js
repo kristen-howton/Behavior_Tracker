@@ -50,7 +50,7 @@ export const LearnerProvider = (props) => {
 
     const getLeanersByUserProfile = () => {
         return getToken().then((token) =>
-            fetch(`${apiUrl}/bylearner`, {
+            fetch(`${apiUrl}/byuser`, {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${token}`
@@ -68,7 +68,7 @@ export const LearnerProvider = (props) => {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify(learner)
-            })).then(getLeanersByUserProfile);
+            })).then(getAllLearners);
     };
 
     const deleteLearner = (id) => {
@@ -79,7 +79,7 @@ export const LearnerProvider = (props) => {
                     Authorization: `Bearer ${token}`,
                     "Content-Type": "application/json"
                 }
-            })).then(getLeanersByUserProfile);
+            })).then(getAllLearners);
     };
 
     return (

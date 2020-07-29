@@ -2,14 +2,14 @@ import React, { useContext } from "react";
 import { Button, Form } from 'reactstrap';
 import { BehaviorContext } from "../../providers/BehaviorProvider";
 
-const BehaviorDeleteModal = ({ toggle, behavior }) => {
+const BehaviorDeleteModal = ({ toggleDelete, behavior }) => {
 
     const { deleteBehavior } = useContext(BehaviorContext);
 
     const submitForm = (e) => {
         e.preventDefault();
         deleteBehavior(behavior.id)
-            .then(toggle)
+            .then(toggleDelete)
             .catch((err) => alert(`An error ocurred: ${err.message}`));
     };
 
@@ -21,7 +21,7 @@ const BehaviorDeleteModal = ({ toggle, behavior }) => {
                     <Button
                         type="button"
                         color="secondary"
-                        onClick={toggle}
+                        onClick={toggleDelete}
                     >Cancel</Button>
                     <Button
                         type="submit"

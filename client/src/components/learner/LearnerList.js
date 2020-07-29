@@ -5,7 +5,7 @@ import { LearnerForm } from './LearnerForm';
 import Learner from './Learner';
 
 const LearnerList = () => {
-    const { learners, getAllLearners } = useContext(LearnerContext);
+    const { learners, getLeanersByUserProfile } = useContext(LearnerContext);
 
     const [modal, setModal] = useState(false)
     const toggle = () => setModal(!modal)
@@ -18,7 +18,7 @@ const LearnerList = () => {
     }
 
     useEffect(() => {
-        getAllLearners()
+        getLeanersByUserProfile()
     }, []);
     return (
         <>

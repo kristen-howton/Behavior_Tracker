@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom'
 import { LearnerContext } from "../../providers/LearnerProvider"
 
 export const LearnerForm = ({ toggle }) => {
-    const { addLearner } = useContext(LearnerContext)
+    const { addLearner, getLeanersByUserProfile } = useContext(LearnerContext)
     const firstName = useRef("firstName")
     const lastName = useRef("lastName")
     const history = useHistory();
@@ -17,6 +17,8 @@ export const LearnerForm = ({ toggle }) => {
         }
 
         addLearner(Learner)
+            .then(toggle)
+            .then(getLeanersByUserProfile)
             .then(history.push('/learner'));
     }
 

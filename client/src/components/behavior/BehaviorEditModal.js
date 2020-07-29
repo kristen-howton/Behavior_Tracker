@@ -2,7 +2,7 @@ import React, { useContext, useRef } from "react";
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 import { BehaviorContext } from "../../providers/BehaviorProvider";
 
-const BehaviorEditModal = ({ toggle, behavior }) => {
+const BehaviorEditModal = ({ toggleEdit, behavior }) => {
 
     const { editBehavior } = useContext(BehaviorContext);
 
@@ -13,30 +13,28 @@ const BehaviorEditModal = ({ toggle, behavior }) => {
         editBehavior(
             behavior.id,
             {
-                learnerId: behavior.learnerId,
                 id: behavior.id,
+                learnerId: behavior.learnerId,
                 isDeleted: false,
                 behaviorName: behavior.behaviorName
 
             })
-            .then(toggle)
+            .then(toggleEdit)
             .catch((err) => alert(`An error ocurred: ${err.message}`));
     };
 
     return (
         <Form onSubmit={submitForm}>
             <FormGroup>
-                <Label for="firstName">Behavior</Label>
+                <Label for="behaviorName">Behavior</Label>
                 <Input type="text" name="behaviorName" id="behaviorName" innerRef={behaviorName} defaultValue={behavior.behaviorName} />
             </FormGroup>
-
-
 
             <FormGroup className="text-right">
                 <Button
                     type="button"
                     color="secondary"
-                    onClick={toggle}
+                    onClick={toggleEdit}
                 >Cancel</Button>
                 <Button
                     type="submit"

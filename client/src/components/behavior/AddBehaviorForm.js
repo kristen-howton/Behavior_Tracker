@@ -1,10 +1,12 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useRef } from "react";
 import { Form } from "reactstrap";
 import { useHistory } from 'react-router-dom';
 import { BehaviorContext } from "../../providers/BehaviorProvider";
 
 export const BehaviorForm = ({ toggle }) => {
-    const { addBehavior } = useContext(BehaviorContext)
+    const { addBehavior, getBehaviorsByLearner } = useContext(BehaviorContext)
+
+
     const behaviorName = useRef("behaviorName")
     const history = useHistory();
 
@@ -15,6 +17,8 @@ export const BehaviorForm = ({ toggle }) => {
         }
 
         addBehavior(Behavior)
+            .then(toggle)
+            .then(getBehaviorsByLearner)
             .then(history.push('/behavior'));
     }
 

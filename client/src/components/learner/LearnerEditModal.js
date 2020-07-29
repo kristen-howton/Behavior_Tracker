@@ -2,7 +2,7 @@ import React, { useContext, useRef } from "react";
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 import { LearnerContext } from "../../providers/LearnerProvider";
 
-const LearnerEditModal = ({ toggle, learner }) => {
+const LearnerEditModal = ({ toggleEdit, learner }) => {
 
     const { editLearner } = useContext(LearnerContext);
 
@@ -20,7 +20,7 @@ const LearnerEditModal = ({ toggle, learner }) => {
                 lastName: lastName.current.value
 
             })
-            .then(toggle)
+            .then(toggleEdit)
             .catch((err) => alert(`An error ocurred: ${err.message}`));
     };
 
@@ -40,7 +40,7 @@ const LearnerEditModal = ({ toggle, learner }) => {
                 <Button
                     type="button"
                     color="secondary"
-                    onClick={toggle}
+                    onClick={toggleEdit}
                 >Cancel</Button>
                 <Button
                     type="submit"
