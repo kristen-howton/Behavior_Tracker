@@ -59,7 +59,7 @@ export const LearnerForm = ({ toggle }) => {
                             addNewLearner()
                         }
                     }
-                    className="btn btn-secondary ml-2">
+                    className="btn btn-pri ml-2">
                     Save
             </button>
             </fieldset>

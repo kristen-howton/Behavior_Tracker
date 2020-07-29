@@ -6,8 +6,8 @@ const LearnerEditModal = ({ toggle, learner }) => {
 
     const { editLearner } = useContext(LearnerContext);
 
-    const firstName = useRef();
-    const lastName = useRef();
+    const firstName = useRef("firstName")
+    const lastName = useRef("lastName")
 
     const submitForm = (e) => {
         e.preventDefault();

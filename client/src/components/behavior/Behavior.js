@@ -1,9 +1,9 @@
 import React, { useState } from "react"
 import { Modal, Button, ModalHeader, ModalBody, ListGroupItem } from 'reactstrap'
-import LearnerEditModal from "./LearnerEditModal";
-import LearnerDeleteModal from "./LearnerDeleteModal";
+import BehaviorEditModal from "./BehaviorEditModal";
+import BehaviorDeleteModal from "./BehaviorDeleteModal";
 
-const Learner = ({ learner }) => {
+const Behavior = ({ behavior }) => {
     const [modal, setModal] = useState(false)
     const toggle = () => setModal(!modal)
 
@@ -11,8 +11,8 @@ const Learner = ({ learner }) => {
     const toggleEdit = () => setEditModal(!editModal)
     return (
         <>
-            <ListGroupItem key={learner.id} className="d-flex justify-content-between">
-                {learner.fullName}
+            <ListGroupItem key={behavior.id} className="d-flex justify-content-between">
+                {behavior.behaviorName}
                 <div className="d-flex justify-content-end">
                     <Button color="info" outline size="sm" className="ml-2" onClick={toggleEdit}>Edit</Button>
                     <Button color="danger" outline size="sm" className="ml-2" onClick={toggle}>Delete</Button>
@@ -20,20 +20,20 @@ const Learner = ({ learner }) => {
             </ListGroupItem>
 
             <Modal isOpen={modal} toggle={toggle} size="md">
-                <ModalHeader toggle={toggle}>Remove Learner</ModalHeader>
+                <ModalHeader toggle={toggle}>Delete behavior</ModalHeader>
                 <ModalBody>
-                    <LearnerDeleteModal learner={learner} toggleDelete={toggle} />
+                    <BehaviorDeleteModal behavior={behavior} toggleDelete={toggle} />
                 </ModalBody>
             </Modal>
 
             <Modal isOpen={editModal} toggle={toggleEdit} className="modal-md">
-                <ModalHeader toggle={toggleEdit}>Edit Learner Information</ModalHeader>
+                <ModalHeader toggle={toggleEdit}>Edit Behavior</ModalHeader>
                 <ModalBody>
-                    <LearnerEditModal learner={learner} toggleEdit={toggleEdit} />
+                    <BehaviorEditModal behavior={behavior} toggleEdit={toggleEdit} />
                 </ModalBody>
             </Modal>
         </>
     );
 };
 
-export default Learner;
+export default Behavior;

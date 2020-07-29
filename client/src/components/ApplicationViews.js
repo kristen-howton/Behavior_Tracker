@@ -6,6 +6,7 @@ import Register from "./Register";
 import AddActivityForm from "./activity/AddActivityForm";
 import ActivityList from "./activity/ActivityList";
 import LearnerList from "./learner/LearnerList";
+import BehaviorList from "./behavior/BehaviorList";
 
 
 export default function ApplicationViews() {
@@ -25,6 +26,10 @@ export default function ApplicationViews() {
 
                 <Route path="/learner" exact>
                     {isLoggedIn ? <LearnerList /> : <Redirect to="/login" />}
+                </Route>
+
+                <Route path="/behavior" exact>
+                    {isLoggedIn ? <BehaviorList /> : <Redirect to="/login" />}
                 </Route>
 
                 <Route path="/login">

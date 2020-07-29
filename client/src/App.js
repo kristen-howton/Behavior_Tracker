@@ -6,6 +6,7 @@ import ApplicationViews from "./components/ApplicationViews";
 import { ActivityProvider } from './providers/ActivityProvider';
 import Header from './Header';
 import { LearnerProvider } from './providers/LearnerProvider';
+import { BehaviorProvider } from './providers/BehaviorProvider';
 
 function App() {
   return (
@@ -13,8 +14,10 @@ function App() {
       <UserProfileProvider>
         <ActivityProvider>
           <LearnerProvider>
-            <Header />
-            <ApplicationViews />
+            <BehaviorProvider>
+              <Header />
+              <ApplicationViews />
+            </BehaviorProvider>
           </LearnerProvider>
         </ActivityProvider>
       </UserProfileProvider>
