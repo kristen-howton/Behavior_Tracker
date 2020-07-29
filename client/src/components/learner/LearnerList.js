@@ -24,8 +24,8 @@ const LearnerList = () => {
         <>
             <div className="container">
                 <div className="row justify-content-center">
-                    <div id="tagList" className="cards-column">
-                        <Button color="primary" onClick={toggle} className="mb-4">Add Learner</Button>
+                    <div id="learnerList" className="cards-column">
+                        <Button color="secondary" onClick={toggle} className="mb-4">Add Learner</Button>
                         <ListGroup>
                             {
                                 (learners.length)
@@ -39,7 +39,7 @@ const LearnerList = () => {
                 </div>
             </div>
             <Modal isOpen={modal} toggle={toggle} className="modal-md">
-                <ModalHeader toggle={toggle}>Create New Category</ModalHeader>
+                <ModalHeader toggle={toggle}>Create New Learner</ModalHeader>
                 <ModalBody>
                     <LearnerForm toggle={toggle} />
                 </ModalBody>

@@ -20,12 +20,14 @@ namespace BehaviorReport.Controllers
         private readonly ActivityRepository _activityRepository;
 
         private readonly UserProfileRepository _userProfileRepository;
+        private readonly LearnerRepository _learnerRepository;
 
 
         //using context instead of config
         public ActivityController(ApplicationDbContext context)
         {
             _activityRepository = new ActivityRepository(context);
+            _learnerRepository = new LearnerRepository(context);
             _userProfileRepository = new UserProfileRepository(context);
 
         }
@@ -72,6 +74,11 @@ namespace BehaviorReport.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
+            List<Learner> LearnersToDelete = _learnerRepository.GetLearnerByUserProfile(id);
+            foreach (Learner learner in LearnersToDelete)
+            {
+                _learnerRepository.Delete(learner.Id);
+            }
             _activityRepository.Delete(id);
             return NoContent();
         }

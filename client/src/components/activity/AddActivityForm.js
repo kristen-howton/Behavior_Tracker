@@ -43,7 +43,7 @@ const AddActivityForm = () => {
                     </FormGroup>
 
                     <div className='d-flex flex-row-reverse'>
-                        <Button color="primary" size='mb-1' onClick={handleSubmit}>Save Activity</Button>
+                        <Button color="secondary" size='mb-1' onClick={handleSubmit}>Save Activity</Button>
                     </div>
                 </Form>
             </div>

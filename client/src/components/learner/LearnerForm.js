@@ -4,12 +4,10 @@ import { useHistory } from 'react-router-dom'
 import { LearnerContext } from "../../providers/LearnerProvider"
 
 export const LearnerForm = ({ toggle }) => {
-    const { learners, getAllLearners, addLearner } = useContext(LearnerContext)
+    const { addLearner } = useContext(LearnerContext)
     const firstName = useRef("firstName")
     const lastName = useRef("lastName")
     const history = useHistory();
-
-    const [showError, setError] = useState(false);
 
     const addNewLearner = () => {
 
@@ -35,7 +33,6 @@ export const LearnerForm = ({ toggle }) => {
                         autoFocus
                         className="form-control"
                         placeholder=""
-                        onChange={() => setError(false)}
                     />
                 </div>
             </fieldset>
@@ -50,7 +47,6 @@ export const LearnerForm = ({ toggle }) => {
                         autoFocus
                         className="form-control"
                         placeholder=""
-                        onChange={() => setError(false)}
                     />
                 </div>
             </fieldset>
@@ -63,7 +59,7 @@ export const LearnerForm = ({ toggle }) => {
                             addNewLearner()
                         }
                     }
-                    className="btn btn-primary ml-2">
+                    className="btn btn-secondary ml-2">
                     Save
             </button>
             </fieldset>
