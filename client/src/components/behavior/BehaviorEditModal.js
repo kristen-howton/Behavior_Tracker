@@ -6,7 +6,7 @@ const BehaviorEditModal = ({ toggleEdit, behavior }) => {
 
     const { editBehavior } = useContext(BehaviorContext);
 
-    const behaviorName = useRef("behaviorName")
+    const behaviorName = useRef()
 
     const submitForm = (e) => {
         e.preventDefault();
@@ -16,7 +16,7 @@ const BehaviorEditModal = ({ toggleEdit, behavior }) => {
                 id: behavior.id,
                 learnerId: behavior.learnerId,
                 isDeleted: false,
-                behaviorName: behavior.behaviorName
+                behaviorName: behaviorName.current.value
 
             })
             .then(toggleEdit)

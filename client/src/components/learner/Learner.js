@@ -19,15 +19,15 @@ const Learner = ({ learner }) => {
                 </div>
             </ListGroupItem>
 
-            <Modal isOpen={deleteModal} toggleDelete={toggleDelete} size="md">
-                <ModalHeader toggleDelete={toggleDelete}>Remove Learner</ModalHeader>
+            <Modal isOpen={deleteModal} size="md">
+                <ModalHeader>Remove Learner</ModalHeader>
                 <ModalBody>
                     <LearnerDeleteModal learner={learner} toggleDelete={toggleDelete} />
                 </ModalBody>
             </Modal>
 
-            <Modal isOpen={editModal} toggleEdit={toggleEdit} className="modal-md">
-                <ModalHeader toggleEdit={toggleEdit}>Edit Learner Information</ModalHeader>
+            <Modal isOpen={editModal} className="modal-md">
+                <ModalHeader>Edit Learner Information</ModalHeader>
                 <ModalBody>
                     <LearnerEditModal learner={learner} toggleEdit={toggleEdit} />
                 </ModalBody>

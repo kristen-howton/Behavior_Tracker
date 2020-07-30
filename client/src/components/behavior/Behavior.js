@@ -19,15 +19,15 @@ const Behavior = ({ behavior }) => {
                 </div>
             </ListGroupItem>
 
-            <Modal isOpen={deleteModal} toggleDelete={toggleDelete} size="md">
-                <ModalHeader toggleDelete={toggleDelete}>Delete behavior</ModalHeader>
+            <Modal isOpen={deleteModal} size="md">
+                <ModalHeader>Delete behavior</ModalHeader>
                 <ModalBody>
                     <BehaviorDeleteModal behavior={behavior} toggleDelete={toggleDelete} />
                 </ModalBody>
             </Modal>
 
-            <Modal isOpen={editModal} toggleEdit={toggleEdit} className="modal-md">
-                <ModalHeader toggleEdit={toggleEdit}>Edit Behavior</ModalHeader>
+            <Modal isOpen={editModal} className="modal-md">
+                <ModalHeader>Edit Behavior</ModalHeader>
                 <ModalBody>
                     <BehaviorEditModal behavior={behavior} toggleEdit={toggleEdit} />
                 </ModalBody>
