@@ -8,86 +8,74 @@ using BehaviorReport.Models;
 using BehaviorReport.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.VisualBasic;
 
 namespace BehaviorReport.Controllers
 {
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class ActivityController : ControllerBase
+    public class LearnerController : ControllerBase
     {
-        private readonly ActivityRepository _activityRepository;
-
-        private readonly UserProfileRepository _userProfileRepository;
         private readonly LearnerRepository _learnerRepository;
 
-
-        //using context instead of config
-        public ActivityController(ApplicationDbContext context)
+        private readonly UserProfileRepository _userProfileRepository;
+        public LearnerController(ApplicationDbContext context)
         {
-            _activityRepository = new ActivityRepository(context);
             _learnerRepository = new LearnerRepository(context);
             _userProfileRepository = new UserProfileRepository(context);
 
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetActivity(int id)
+        public IActionResult GetLearner(int id)
         {
-            return Ok(_activityRepository.GetActivityById(id));
+            return Ok(_learnerRepository.GetLearnerById(id));
         }
 
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok(_activityRepository.GetAllActivities());
+            return Ok(_learnerRepository.GetAllLeaners());
         }
 
         [HttpGet("byuser")]
         public IActionResult GetByUserProfile()
         {
             var currentUserProfile = GetCurrentUserProfile();
-            return Ok(_activityRepository.GetActivitiesByUserProfile(currentUserProfile.Id));
+            return Ok(_learnerRepository.GetLearnerByUserProfile(currentUserProfile.Id));
         }
 
         [HttpPost]
-        public IActionResult Activity(Activity activity)
+        public IActionResult Learner(Learner learner)
         {
             var currentUserProfile = GetCurrentUserProfile();
-            activity.UserProfileId = currentUserProfile.Id;
-            _activityRepository.Add(activity);
-            return CreatedAtAction(nameof(Get), new { id = activity.Id }, activity);
+            learner.UserProfileId = currentUserProfile.Id;
+            _learnerRepository.Add(learner);
+            return CreatedAtAction(nameof(Get), new { id = learner.Id }, learner);
         }
         [HttpPut("{id}")]
-        public IActionResult Put(int id, Activity activity)
+        public IActionResult Put(int id, Learner learner)
         {
-            if (id != activity.Id)
+            if (id != learner.Id)
             {
                 return BadRequest();
             }
 
-            _activityRepository.Update(activity);
+            _learnerRepository.Update(learner);
             return NoContent();
         }
 
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            List<Learner> LearnersToDelete = _learnerRepository.GetLearnerByUserProfile(id);
-            foreach (Learner learner in LearnersToDelete)
-            {
-                _learnerRepository.Delete(learner.Id);
-            }
-            _activityRepository.Delete(id);
+            _learnerRepository.Delete(id);
             return NoContent();
         }
         private UserProfile GetCurrentUserProfile()
         {
             var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            return _userProfileRepository.GetByFirebaseUserId(firebaseUserId);
+            return _userProfileRepository.GetByFirebaseUserId(firebaseUserId); 
         }
 
     }
-
 }

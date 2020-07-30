@@ -5,7 +5,7 @@ import { ActivityContext } from '../../providers/ActivityProvider';
 
 
 const AddActivityForm = () => {
-    const { addActivity } = useContext(ActivityContext)
+    const { addActivity, getActivityByUserProfile } = useContext(ActivityContext)
 
     const history = useHistory();
 
@@ -22,6 +22,7 @@ const AddActivityForm = () => {
         }
 
         addActivity(Activity)
+            .then(getActivityByUserProfile)
             .then(history.push('/activity'));
     }
     return (
@@ -43,7 +44,7 @@ const AddActivityForm = () => {
                     </FormGroup>
 
                     <div className='d-flex flex-row-reverse'>
-                        <Button color="primary" size='mb-1' onClick={handleSubmit}>Save Activity</Button>
+                        <Button color="secondary" size='mb-1' onClick={handleSubmit}>Save Activity</Button>
                     </div>
                 </Form>
             </div>

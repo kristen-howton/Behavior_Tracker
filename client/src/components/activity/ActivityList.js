@@ -9,8 +9,7 @@ const ActivityList = () => {
 
     useEffect(() => {
         getActivityByUserProfile()
-
-    }, []);
+    });
 
     return (
         <>
