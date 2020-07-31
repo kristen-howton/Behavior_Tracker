@@ -19,6 +19,10 @@ namespace BehaviorReport.Repositories
         public Report GetReportById(int id)
         {
             return _context.Report
+                            .Include(r => r.Learner)
+                            .Include(r => r.Consequence)
+                            .Include(r => r.Activity)
+                            .Include(r => r.Behavior)
                             .FirstOrDefault(r => r.Id == id);
         }
         public List<Report> GetAllReports()
@@ -38,7 +42,6 @@ namespace BehaviorReport.Repositories
                             .Where(r => r.LearnerId == id)
                             .ToList();
         }
-
         public void Add(Report report)
         {
             _context.Add(report);

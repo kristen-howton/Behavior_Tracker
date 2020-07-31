@@ -18,7 +18,6 @@ namespace BehaviorReport.Controllers
     public class ActivityController : ControllerBase
     {
         private readonly ActivityRepository _activityRepository;
-
         private readonly UserProfileRepository _userProfileRepository;
         private readonly LearnerRepository _learnerRepository;
 
@@ -66,7 +65,6 @@ namespace BehaviorReport.Controllers
             {
                 return BadRequest();
             }
-
             _activityRepository.Update(activity);
             return NoContent();
         }

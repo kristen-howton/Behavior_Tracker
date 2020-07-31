@@ -21,6 +21,16 @@ const AddActivityForm = () => {
             isDeleted: false
         }
 
+        if (!Activity.activityName.length) {
+            window.alert("Must add an activity.")
+            return
+        }
+
+        if (!Activity.imageUrl.length) {
+            window.alert("Must add an image.")
+            return
+        }
+
         addActivity(Activity)
             .then(getActivityByUserProfile)
             .then(history.push('/activity'));
@@ -36,6 +46,7 @@ const AddActivityForm = () => {
                         <Input type='text' name='Title' id='activityName' innerRef={activityName}
                             placeholder='Activity' className='form-control'></Input>
                     </FormGroup>
+
                     <FormGroup>
                         <Label for="imageUpload">Activity Image</Label>
                         <InputGroup className="mt-2">

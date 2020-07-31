@@ -29,7 +29,7 @@ namespace BehaviorReport.Models
         [Required]
         public int ActivityId { get; set; }
         public Activity Activity { get; set; }
-
+            
         [Required(ErrorMessage = "Hmmm...Looks like your forgot to add your note...")]
         [StringLength(500, MinimumLength = 1)]
         public string Note { get; set; }

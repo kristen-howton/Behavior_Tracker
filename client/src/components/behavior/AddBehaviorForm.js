@@ -16,6 +16,11 @@ export const BehaviorForm = ({ toggle }) => {
             behaviorName: behaviorName.current.value
         }
 
+        if (!Behavior.behaviorName.length) {
+            window.alert("Must add a behavior.")
+            return
+        }
+
         addBehavior(Behavior)
             .then(toggle)
             .then(getBehaviorsByLearner)

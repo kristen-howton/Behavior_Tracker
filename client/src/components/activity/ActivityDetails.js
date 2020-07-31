@@ -1,11 +1,22 @@
-import React from "react";
-import { Media, Card } from "reactstrap";
+// import React, { useEffect, useContext } from "react";
+// import { Card, Media } from "reactstrap";
+// import { ActivityContext } from "../../providers/ActivityProvider";
 
-export const ActivityDetails = (activity) => (
-    <Card className="activity">
-        <h3>{activity.activityName}</h3>
-        <Media object src={activity.activityUrl} />
-    </Card>
-)
+// const { getActivity } = useContext(ActivityContext);
 
+// useEffect(() => {
+//     getActivity()
+// }, []);
 
+// const ActivityDetails = (activity) => {
+//     return (
+//         <>
+//             <Card className="activity">
+//                 <h3>{activity.activityName}</h3>
+//                 <Media object src={activity.activityUrl} />
+//             </Card>
+//         </>
+//     );
+// };
+
+// export default ActivityDetails;

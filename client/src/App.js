@@ -7,6 +7,8 @@ import { ActivityProvider } from './providers/ActivityProvider';
 import Header from './Header';
 import { LearnerProvider } from './providers/LearnerProvider';
 import { BehaviorProvider } from './providers/BehaviorProvider';
+import { ReportProvider } from './providers/ReportProvider';
+import { ConsequenceProvider } from './providers/ConsequenceProvider';
 
 function App() {
   return (
@@ -15,8 +17,12 @@ function App() {
         <ActivityProvider>
           <LearnerProvider>
             <BehaviorProvider>
-              <Header />
-              <ApplicationViews />
+              <ConsequenceProvider>
+                <ReportProvider>
+                  <Header />
+                  <ApplicationViews />
+                </ReportProvider>
+              </ConsequenceProvider>
             </BehaviorProvider>
           </LearnerProvider>
         </ActivityProvider>

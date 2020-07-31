@@ -16,6 +16,16 @@ export const LearnerForm = ({ toggle }) => {
             lastName: lastName.current.value
         }
 
+        if (!Learner.firstName.length) {
+            window.alert("Must add a first name for a learner.")
+            return
+        }
+
+        if (!Learner.lastName.length) {
+            window.alert("Must add a last name for a learner.")
+            return
+        }
+
         addLearner(Learner)
             .then(toggle)
             .then(getLeanersByUserProfile)
