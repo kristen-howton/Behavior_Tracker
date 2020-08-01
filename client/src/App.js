@@ -9,6 +9,7 @@ import { LearnerProvider } from './providers/LearnerProvider';
 import { BehaviorProvider } from './providers/BehaviorProvider';
 import { ReportProvider } from './providers/ReportProvider';
 import { ConsequenceProvider } from './providers/ConsequenceProvider';
+import { PromptLevelProvider } from './providers/PromptLevelProvider';
 
 function App() {
   return (
@@ -18,10 +19,12 @@ function App() {
           <LearnerProvider>
             <BehaviorProvider>
               <ConsequenceProvider>
-                <ReportProvider>
-                  <Header />
-                  <ApplicationViews />
-                </ReportProvider>
+                <PromptLevelProvider>
+                  <ReportProvider>
+                    <Header />
+                    <ApplicationViews />
+                  </ReportProvider>
+                </PromptLevelProvider>
               </ConsequenceProvider>
             </BehaviorProvider>
           </LearnerProvider>

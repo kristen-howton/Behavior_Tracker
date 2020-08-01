@@ -27,10 +27,12 @@ const ReportList = () => {
                         <Table bordered hover striped>
                             <thead>
                                 <tr>
+                                    <th>Date</th>
                                     <th>Name</th>
+                                    <th>Activity</th>
                                     <th>Behavior</th>
                                     <th>Consequence</th>
-                                    <th>Activity</th>
+                                    <th>Level of Prompting</th>
                                     <th>Notes</th>
                                 </tr>
                             </thead>

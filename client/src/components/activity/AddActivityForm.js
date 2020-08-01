@@ -11,6 +11,7 @@ const AddActivityForm = () => {
 
     const activityName = useRef()
     const imageUrl = useRef()
+    const description = useRef()
 
     const handleSubmit = (event) => {
 
@@ -18,6 +19,7 @@ const AddActivityForm = () => {
         const Activity = {
             activityName: activityName.current.value,
             imageUrl: imageUrl.current.value,
+            description: description.current.value,
             isDeleted: false
         }
 
@@ -31,9 +33,14 @@ const AddActivityForm = () => {
             return
         }
 
+        if (!Activity.description.length) {
+            window.alert("Must add a description.")
+            return
+        }
+
         addActivity(Activity)
             .then(getActivityByUserProfile)
-            .then(history.push('/activity'));
+            .then(() => history.push('/'));
     }
     return (
         <div className="d-flex justify-content-center">
@@ -52,6 +59,12 @@ const AddActivityForm = () => {
                         <InputGroup className="mt-2">
                             <Input type='text' name='imageUrl' id='imageUrl' innerRef={imageUrl} placeholder="http://ImageUrl" />
                         </InputGroup>
+                    </FormGroup>
+
+                    <FormGroup>
+                        <Label for="activityDescription">Description</Label>
+                        <Input type='text-area' name='Description' id='activityDescription' innerRef={description}
+                            placeholder='Activity' className='form-control'></Input>
                     </FormGroup>
 
                     <div className='d-flex flex-row-reverse'>

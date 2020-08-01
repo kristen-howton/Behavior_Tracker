@@ -6,6 +6,7 @@ import { BehaviorContext } from '../../providers/BehaviorProvider';
 import { LearnerContext } from '../../providers/LearnerProvider';
 import { ConsequenceContext } from '../../providers/ConsequenceProvider';
 import { ActivityContext } from '../../providers/ActivityProvider';
+import { PromptLevelContext } from '../../providers/PromptLevelProvider'
 
 const ReportForm = () => {
     const { addReport, getReportByLearner } = useContext(ReportContext)
@@ -13,6 +14,7 @@ const ReportForm = () => {
     const { learners, getLeanersByUserProfile } = useContext(LearnerContext)
     const { consequences, getAllConsequences } = useContext(ConsequenceContext)
     const { activities, getActivityByUserProfile } = useContext(ActivityContext)
+    const { promptLevels, getAllPromptLevels } = useContext(PromptLevelContext)
 
     const [date, setDate] = useState()
 
@@ -20,13 +22,14 @@ const ReportForm = () => {
     const [learnerSelect, setLearnerSelection] = useState("");
     const [consequenceSelect, setConsequenceSelection] = useState("");
     const [activitySelect, setActivitySelection] = useState("");
+    const [promptLevelSelect, setPromptLevelSelection] = useState("");
 
     const history = useHistory();
 
     const note = useRef()
 
     useEffect(() => {
-        getBehaviorsByLearner()
+        getBehaviorsByLearner(learnerSelect.id)
     }, [])
 
     useEffect(() => {
@@ -39,6 +42,10 @@ const ReportForm = () => {
 
     useEffect(() => {
         getActivityByUserProfile()
+    }, [])
+
+    useEffect(() => {
+        getAllPromptLevels()
     }, [])
 
     const handleBehaviorSelection = (e) => {
@@ -61,6 +68,10 @@ const ReportForm = () => {
         setDate(e.target.value)
     }
 
+    const handlePromptChange = (e) => {
+        setPromptLevelSelection(e.target.value)
+    }
+
     const handleSubmit = (event) => {
 
 
@@ -69,14 +80,49 @@ const ReportForm = () => {
             learnerId: +learnerSelect,
             behaviorId: +behaviorSelect,
             behaviorId: +consequenceSelect,
+            promptLevelId: +promptLevelSelect,
             note: note.current.value,
             date: date,
             consequenceId: +consequenceSelect
         }
 
+        if (!Report.date) {
+            window.alert("Must select a date.")
+            return
+        }
+
+        if (!Report.activityId) {
+            window.alert("Please select an activity.")
+            return
+        }
+
+        if (!Report.learnerId) {
+            window.alert("Please select a learner.")
+            return
+        }
+
+        if (!Report.behaviorId) {
+            window.alert("Please select a behavior.")
+            return
+        }
+
+        if (!Report.note.length) {
+            window.alert("Please add a note.")
+            return
+        }
+
+        if (!Report.consequenceId) {
+            window.alert("Please select a consequence.")
+            return
+        }
+
+        if (!Report.promptLevelId) {
+            window.alert("Please select a prompt level.")
+            return
+        }
+
         addReport(Report)
-            .then(getReportByLearner)
-            .then(history.push('/report'));
+            .then(() => history.push('/report'));
     }
     return (
         <div className="d-flex justify-content-center">
@@ -113,12 +159,21 @@ const ReportForm = () => {
                     </FormGroup>
 
                     <FormGroup>
+                        <Label for='promptLevelId'>Level of Prompting Needed</Label>
+                        <Input type="select" onChange={handlePromptChange} id="promptLevelId">
+                            <option value="">Please select...</option>
+                            {promptLevels.map((promptLevel) => <option key={promptLevel.id} value={promptLevel.id}>{promptLevel.prompt}</option>)}
+                        </Input>
+                    </FormGroup>
+
+                    <FormGroup>
                         <Label for='consequenceId'>Conseqeuence</Label>
                         <Input type="select" onChange={handleConsequenceSelection} required id="behaviorId">
                             <option value="">Please select...</option>
                             {consequences.map((consequence) => <option key={consequence.id} value={consequence.id}>{consequence.consequenceName}</option>)}
                         </Input>
                     </FormGroup>
+
                     <FormGroup>
                         <Label for="notes">Notes</Label>
                         <Input type='textarea' name='Note' id='note' innerRef={note}

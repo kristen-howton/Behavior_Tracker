@@ -8,6 +8,7 @@ const ActivityEditModal = ({ toggle, activity }) => {
 
     const activityName = useRef();
     const imageUrl = useRef();
+    const description = useRef();
 
     const submitForm = (e) => {
         e.preventDefault();
@@ -18,6 +19,7 @@ const ActivityEditModal = ({ toggle, activity }) => {
                 id: activity.id,
                 activityName: activityName.current.value,
                 imageUrl: imageUrl.current.value,
+                description: description.current.value,
                 isDeleted: false
 
             })
@@ -37,6 +39,11 @@ const ActivityEditModal = ({ toggle, activity }) => {
                 <InputGroup className="mt-2">
                     <Input type='text' name='activityUrl' id='activityUrl' innerRef={imageUrl} defaultValue={activity.imageUrl} />
                 </InputGroup>
+            </FormGroup>
+
+            <FormGroup>
+                <Label for="activityDescription">Description</Label>
+                <Input type="text-area" name="activityName" id="activityName" innerRef={description} defaultValue={activity.description} />
             </FormGroup>
 
             <FormGroup className="text-right">

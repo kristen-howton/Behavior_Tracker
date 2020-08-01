@@ -32,6 +32,7 @@ namespace BehaviorReport.Repositories
                             .Include(r => r.Consequence)
                             .Include(r => r.Activity)
                             .Include(r => r.Behavior)
+                            .Include(r => r.PromptLevel)
                             .ToList();
         }
 
