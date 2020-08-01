@@ -40,6 +40,10 @@ namespace BehaviorReport.Repositories
         {
             return _context.Report
                             .Include(r => r.Learner)
+                            .Include(r => r.Consequence)
+                            .Include(r => r.Activity)
+                            .Include(r => r.Behavior)
+                            .Include(r => r.PromptLevel)
                             .Where(r => r.LearnerId == id)
                             .ToList();
         }

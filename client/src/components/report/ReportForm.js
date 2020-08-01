@@ -1,6 +1,6 @@
 import React, { useContext, useRef, useState, useEffect } from 'react'
 import { Form, FormGroup, Input, Button, Label, InputGroup } from 'reactstrap'
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { ReportContext } from '../../providers/ReportProvider';
 import { BehaviorContext } from '../../providers/BehaviorProvider';
 import { LearnerContext } from '../../providers/LearnerProvider';
@@ -25,6 +25,7 @@ const ReportForm = () => {
     const [promptLevelSelect, setPromptLevelSelection] = useState("");
 
     const history = useHistory();
+    const id = useParams();
 
     const note = useRef()
 
@@ -46,6 +47,10 @@ const ReportForm = () => {
 
     useEffect(() => {
         getAllPromptLevels()
+    }, [])
+
+    useEffect(() => {
+        getReportByLearner(id)
     }, [])
 
     const handleBehaviorSelection = (e) => {

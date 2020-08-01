@@ -1,10 +1,13 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { ReportContext } from '../../providers/ReportProvider';
 import Report from './Report';
-import { Table } from 'reactstrap';
+import { Table, FormGroup, Input, Label } from 'reactstrap';
+import { LearnerContext } from '../../providers/LearnerProvider';
 
 const ReportList = () => {
-    const { reports, getAllReports } = useContext(ReportContext);
+    const { reports, getReportByLearner } = useContext(ReportContext);
+    const { learners, getLeanersByUserProfile } = useContext(LearnerContext)
+    const [id, setLearnerSelection] = useState(null);
 
     const renderListItem = (report) => {
         if (report.id > 0) {
@@ -14,13 +17,28 @@ const ReportList = () => {
         }
     }
 
+    useEffect(() => {
+        getReportByLearner(id)
+    }, [id]);
 
     useEffect(() => {
-        getAllReports()
+        getLeanersByUserProfile()
     }, []);
+
+    const handleLearnerSelection = (e) => {
+        setLearnerSelection(e.target.value)
+    }
 
     return (
         <>
+            <FormGroup>
+                <Label for='learnerId'>Select a learner</Label>
+                <Input type="select" onChange={handleLearnerSelection} required id="learnerId">
+                    <option value="">Please select...</option>
+                    {learners.map((learner) => <option key={learner.id} value={learner.id}>{learner.fullName}</option>)}
+                </Input>
+            </FormGroup>
+
             <div className="container">
                 <div className="row justify-content-center">
                     <div id="reportList" className="cards-column">

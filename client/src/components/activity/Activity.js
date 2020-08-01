@@ -22,7 +22,7 @@ const Activity = ({ activity }) => {
                 <CardBody>{activity.description}</CardBody>
                 {activity.userProfileId === currentUserId ? (
                     <div>
-                        {/* <Button color="success" size="sm" className="ml-2" outline><Link to={`/activityDetails/`}>Details</Link></Button> */}
+                        <Button color="primary" size="sm" className="ml-2" outline><Link to={`/activityDetails/${activity.id}`}>Details</Link></Button>
                         <Button color="success" size="sm" className="ml-2" outline><Link to={`/reportForm/`} className="linkText">Record</Link></Button>
                         <Button color="info" size="sm" className="ml-2" outline onClick={() => { editModalToggle() }}>Edit</Button>
                         <Button color="danger" size="sm" className="ml-2" outline onClick={() => { deleteModalToggle() }}>Delete</Button>

@@ -43,9 +43,9 @@ export default function ApplicationViews() {
                     {isLoggedIn ? <ReportForm /> : <Redirect to="/login" />}
                 </Route>
 
-                {/* <Route path="/activityDetails" exact>
+                <Route path="/activityDetails/:id" exact>
                     {isLoggedIn ? <ActivityDetails /> : <Redirect to="/login" />}
-                </Route> */}
+                </Route>
 
                 <Route path="/login">
                     <Login />

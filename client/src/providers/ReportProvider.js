@@ -48,15 +48,20 @@ export const ReportProvider = (props) => {
             }));
     };
 
-    const getReportByLearner = () => {
-        return getToken().then((token) =>
-            fetch(`${apiUrl}/bylearner`, {
-                method: "GET",
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            }).then(resp => resp.json())
-                .then(setReports));
+    const getReportByLearner = (id) => {
+        return getToken().then((token) => {
+            if (id === null) {
+                setReports([]);
+            } else {
+                fetch(`${apiUrl}/bylearner/${id}`, {
+                    method: "GET",
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                }).then(resp => resp.json())
+                    .then(setReports)
+            }
+        });
     };
 
     const editReport = (id, report) => {

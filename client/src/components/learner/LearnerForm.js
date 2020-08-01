@@ -1,5 +1,5 @@
 import React, { useContext, useRef } from "react"
-import { Form } from "reactstrap"
+import { Form, Button } from "reactstrap"
 import { useHistory } from 'react-router-dom'
 import { LearnerContext } from "../../providers/LearnerProvider"
 
@@ -63,17 +63,17 @@ export const LearnerForm = ({ toggle }) => {
                 </div>
             </fieldset>
             <fieldset className="text-right">
-                <button type="button" onClick={toggle} className="btn btn-secondary">Cancel</button>
-                <button type="submit"
+                <Button type="button" onClick={toggle} color="secondary">Cancel</Button>
+                <Button type="submit"
                     onClick={
                         evt => {
                             evt.preventDefault() // Prevent browser from submitting the form
                             addNewLearner()
                         }
                     }
-                    className="btn btn-pri ml-2">
+                    color="primary">
                     Save
-            </button>
+            </Button>
             </fieldset>
         </Form>
     )
