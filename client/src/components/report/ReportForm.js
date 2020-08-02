@@ -1,5 +1,5 @@
 import React, { useContext, useRef, useState, useEffect } from 'react'
-import { Form, FormGroup, Input, Button, Label, InputGroup } from 'reactstrap'
+import { Form, FormGroup, Input, Button, Label } from 'reactstrap'
 import { useHistory, useParams } from "react-router-dom";
 import { ReportContext } from '../../providers/ReportProvider';
 import { BehaviorContext } from '../../providers/BehaviorProvider';
@@ -7,6 +7,7 @@ import { LearnerContext } from '../../providers/LearnerProvider';
 import { ConsequenceContext } from '../../providers/ConsequenceProvider';
 import { ActivityContext } from '../../providers/ActivityProvider';
 import { PromptLevelContext } from '../../providers/PromptLevelProvider'
+import "./Report.css";
 
 const ReportForm = () => {
     const { addReport, getReportByLearner } = useContext(ReportContext)
@@ -30,8 +31,8 @@ const ReportForm = () => {
     const note = useRef()
 
     useEffect(() => {
-        getBehaviorsByLearner(learnerSelect.id)
-    }, [])
+        getBehaviorsByLearner(learnerSelect)
+    }, [learnerSelect])
 
     useEffect(() => {
         getLeanersByUserProfile()
@@ -157,10 +158,20 @@ const ReportForm = () => {
 
                     <FormGroup>
                         <Label for='behaviorId'>Behavior</Label>
-                        <Input type="select" onChange={handleBehaviorSelection} required id="behaviorId">
-                            <option value="">Please select...</option>
-                            {behaviors.map((behavior) => <option key={behavior.id} value={behavior.id}>{behavior.behaviorName}</option>)}
-                        </Input>
+                        {
+                            learnerSelect != "" ?
+                                <Input type="select" onChange={handleBehaviorSelection} required id="behaviorId">
+                                    <option value="">Please select...</option>
+                                    {behaviors.map((behavior) => <option key={behavior.id} value={behavior.id}>{behavior.behaviorName}</option>)}
+                                </Input>
+                                : <div className="alert alert-secondary mt-1" role="alert">Please select a learner.</div>
+                        }
+                        <div class="noBehaviorWarning">
+                            {!behaviors.length && learnerSelect != ""
+                                ? <div>Please go back and add behaviors or select a different learner.</div>
+                                : <div></div>
+                            }
+                        </div>
                     </FormGroup>
 
                     <FormGroup>

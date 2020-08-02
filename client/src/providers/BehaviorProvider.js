@@ -48,15 +48,20 @@ export const BehaviorProvider = (props) => {
             }));
     };
 
-    const getBehaviorsByLearner = () => {
-        return getToken().then((token) =>
-            fetch(`${apiUrl}/bylearner`, {
-                method: "GET",
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            }).then(resp => resp.json())
-                .then(setBehaviors));
+    const getBehaviorsByLearner = (id) => {
+        return getToken().then((token) => {
+            if (id === null || id === "") {
+                setBehaviors([])
+            } else {
+                fetch(`${apiUrl}/bylearner/${id}`, {
+                    method: "GET",
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                }).then(resp => resp.json())
+                    .then(setBehaviors)
+            }
+        });
     };
 
     const editBehavior = (id, behavior) => {
