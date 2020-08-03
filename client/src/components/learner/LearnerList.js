@@ -19,7 +19,7 @@ const LearnerList = () => {
 
     useEffect(() => {
         getLeanersByUserProfile()
-    });
+    }, []);
     return (
         <>
             <div className="container">

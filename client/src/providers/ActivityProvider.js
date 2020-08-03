@@ -16,8 +16,7 @@ export const ActivityProvider = (props) => {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
-            }).then(resp => resp.json())
-                .then(setActivities));
+            }).then(resp => resp.json()));
     };
 
     const getAllActivities = () => {

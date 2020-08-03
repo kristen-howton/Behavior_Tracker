@@ -8,72 +8,69 @@ using BehaviorReport.Models;
 using BehaviorReport.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.VisualBasic;
 
 namespace BehaviorReport.Controllers
 {
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class ActivityController : ControllerBase
+    public class ReportController : ControllerBase
     {
-        private readonly ActivityRepository _activityRepository;
+        private readonly ReportRepository _reportRepository;
         private readonly UserProfileRepository _userProfileRepository;
-        private readonly LearnerRepository _learnerRepository;
 
 
         //using context instead of config
-        public ActivityController(ApplicationDbContext context)
+        public ReportController(ApplicationDbContext context)
         {
-            _activityRepository = new ActivityRepository(context);
-            _learnerRepository = new LearnerRepository(context);
+            _reportRepository = new ReportRepository(context);
+
             _userProfileRepository = new UserProfileRepository(context);
 
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetActivity(int id)
+        public IActionResult GetReport(int id)
         {
-            return Ok(_activityRepository.GetActivityById(id));
+            return Ok(_reportRepository.GetReportById(id));
         }
 
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok(_activityRepository.GetAllActivities());
+            return Ok(_reportRepository.GetAllReports());
         }
 
-        [HttpGet("byuser")]
-        public IActionResult GetByUserProfile()
+        [HttpGet("bylearner/{id}")]
+        public IActionResult GetByLearner(int id)
         {
-            var currentUserProfile = GetCurrentUserProfile();
-            return Ok(_activityRepository.GetActivitiesByUserProfile(currentUserProfile.Id));
+            return Ok(_reportRepository.GetReportByLearner(id));
         }
 
         [HttpPost]
-        public IActionResult Activity(Activity activity)
+        public IActionResult Report(Report report)
         {
             var currentUserProfile = GetCurrentUserProfile();
-            activity.UserProfileId = currentUserProfile.Id;
-            _activityRepository.Add(activity);
-            return CreatedAtAction(nameof(Get), new { id = activity.Id }, activity);
+            report.LearnerId = currentUserProfile.Id;
+            _reportRepository.Add(report);
+            return CreatedAtAction(nameof(Get), new { id = report.Id }, report);
         }
-
         [HttpPut("{id}")]
-        public IActionResult Put(int id, Activity activity)
+        public IActionResult Put(int id, Report report)
         {
-            if (id != activity.Id)
+            if (id != report.Id)
             {
                 return BadRequest();
             }
-            _activityRepository.Update(activity);
+
+            _reportRepository.Update(report);
             return NoContent();
         }
 
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
-        { 
-            _activityRepository.Delete(id);
+        {
+            _reportRepository.Delete(id);
             return NoContent();
         }
         private UserProfile GetCurrentUserProfile()
@@ -81,7 +78,5 @@ namespace BehaviorReport.Controllers
             var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
             return _userProfileRepository.GetByFirebaseUserId(firebaseUserId);
         }
-
     }
-
 }

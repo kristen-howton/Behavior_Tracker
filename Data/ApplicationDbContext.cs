@@ -16,6 +16,7 @@ namespace BehaviorReport.Data
         public DbSet<Behavior> Behavior { get; set; }
         public DbSet<Report> Report { get; set; }
         public DbSet<Consequence> Consequence { get; set; }
+        public DbSet<PromptLevel> PromptLevel { get; set; }
         public DbSet<Learner> Learner { get; set; }
 
     }

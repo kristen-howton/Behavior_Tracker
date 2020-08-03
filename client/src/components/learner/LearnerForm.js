@@ -1,5 +1,5 @@
 import React, { useContext, useRef } from "react"
-import { Form } from "reactstrap"
+import { Form, Button } from "reactstrap"
 import { useHistory } from 'react-router-dom'
 import { LearnerContext } from "../../providers/LearnerProvider"
 
@@ -16,6 +16,16 @@ export const LearnerForm = ({ toggle }) => {
             lastName: lastName.current.value
         }
 
+        if (Learner.firstName.length < 1 || Learner.firstName.length > 50) {
+            window.alert("First name must be between 1-50 characters.")
+            return
+        }
+
+        if (Learner.lastName.length < 1 || Learner.lastName.length > 50) {
+            window.alert("Last name must be between 1-50 characters.")
+            return
+        }
+
         addLearner(Learner)
             .then(toggle)
             .then(getLeanersByUserProfile)
@@ -26,7 +36,7 @@ export const LearnerForm = ({ toggle }) => {
         <Form className="learnerForm">
             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="name">First Name</label>
+                    <label htmlFor="name" maxlength="50">First Name</label>
                     <input
                         type="text"
                         id="name"
@@ -40,7 +50,7 @@ export const LearnerForm = ({ toggle }) => {
             </fieldset>
             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="name">Last Name</label>
+                    <label htmlFor="name" maxlength="50">Last Name</label>
                     <input
                         type="text"
                         id="name"
@@ -53,17 +63,17 @@ export const LearnerForm = ({ toggle }) => {
                 </div>
             </fieldset>
             <fieldset className="text-right">
-                <button type="button" onClick={toggle} className="btn btn-secondary">Cancel</button>
-                <button type="submit"
+                <Button type="button" onClick={toggle} color="secondary">Cancel</Button>
+                <Button type="submit"
                     onClick={
                         evt => {
                             evt.preventDefault() // Prevent browser from submitting the form
                             addNewLearner()
                         }
                     }
-                    className="btn btn-pri ml-2">
+                    color="primary">
                     Save
-            </button>
+            </Button>
             </fieldset>
         </Form>
     )

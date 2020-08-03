@@ -8,9 +8,16 @@ const ActivityEditModal = ({ toggle, activity }) => {
 
     const activityName = useRef();
     const imageUrl = useRef();
+    const description = useRef();
 
     const submitForm = (e) => {
         e.preventDefault();
+
+        if (activityName.current.value.length < 1 || activityName.current.value.length > 50) {
+            window.alert("Activity name must be 1 to 50 characters.")
+            return
+        }
+
         editActivity(
             activity.id,
             {
@@ -18,6 +25,7 @@ const ActivityEditModal = ({ toggle, activity }) => {
                 id: activity.id,
                 activityName: activityName.current.value,
                 imageUrl: imageUrl.current.value,
+                description: description.current.value,
                 isDeleted: false
 
             })
@@ -29,14 +37,19 @@ const ActivityEditModal = ({ toggle, activity }) => {
         <Form onSubmit={submitForm}>
             <FormGroup>
                 <Label for="activityName">Activity Name</Label>
-                <Input type="text" name="activityName" id="activityName" innerRef={activityName} defaultValue={activity.activityName} />
+                <Input type="text" name="activityName" id="activityName" maxlength="50" innerRef={activityName} defaultValue={activity.activityName} />
             </FormGroup>
 
             <FormGroup>
                 <Label for="imageUpload">Activity Image</Label>
                 <InputGroup className="mt-2">
-                    <Input type='text' name='activityUrl' id='activityUrl' innerRef={imageUrl} defaultValue={activity.imageUrl} />
+                    <Input type='text' name='activityUrl' id='activityUrl' maxlength="2000" innerRef={imageUrl} defaultValue={activity.imageUrl} />
                 </InputGroup>
+            </FormGroup>
+
+            <FormGroup>
+                <Label for="activityDescription">Description</Label>
+                <Input type="text-area" name="activityName" id="activityName" maxlength="50" innerRef={description} defaultValue={activity.description} />
             </FormGroup>
 
             <FormGroup className="text-right">

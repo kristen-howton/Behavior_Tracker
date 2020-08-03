@@ -1,19 +1,51 @@
-import React, { useContext, useRef } from "react";
-import { Form } from "reactstrap";
+import React, { useContext, useRef, useEffect, useState } from "react";
+import { Form, Button, FormGroup, Input, Label } from "reactstrap";
 import { useHistory } from 'react-router-dom';
 import { BehaviorContext } from "../../providers/BehaviorProvider";
+import { LearnerContext } from "../../providers/LearnerProvider";
+import "./Behavior"
+import "./Behavior.css"
 
 export const BehaviorForm = ({ toggle }) => {
     const { addBehavior, getBehaviorsByLearner } = useContext(BehaviorContext)
+    const [learnerSelect, setLearnerSelection] = useState("");
+    const [behaviorNameInvalid, setBehaviorNameInvalid] = useState(false);
+    const [learnerIdInvalid, setLearnerIdInvalid] = useState(false);
+    const { learners, getLeanersByUserProfile } = useContext(LearnerContext)
 
 
-    const behaviorName = useRef("behaviorName")
+    const behaviorName = useRef()
     const history = useHistory();
 
+    useEffect(() => {
+        getLeanersByUserProfile()
+    }, [])
+
+    useEffect(() => {
+        setLearnerIdInvalid(false)
+    }, [learnerSelect])
+
+    const handleLearnerSelection = (e) => {
+        setLearnerSelection(e.target.value)
+    }
+
     const addNewBehavior = () => {
+        setBehaviorNameInvalid(false)
+
 
         const Behavior = {
-            behaviorName: behaviorName.current.value
+            behaviorName: behaviorName.current.value,
+            learnerId: +learnerSelect
+        }
+
+        if (!Behavior.learnerId) {
+            setLearnerIdInvalid(true)
+            return
+        }
+
+        if (Behavior.behaviorName.length < 1 || Behavior.behaviorName.length > 50) {
+            setBehaviorNameInvalid(true)
+            return
         }
 
         addBehavior(Behavior)
@@ -23,34 +55,50 @@ export const BehaviorForm = ({ toggle }) => {
     }
 
     return (
+
         <Form className="behaviorForm">
-            <fieldset>
-                <div className="form-group">
-                    <label htmlFor="name">Behavior Name</label>
-                    <input
-                        type="text"
-                        id="name"
-                        ref={behaviorName}
-                        required
-                        autoFocus
-                        className="form-control"
-                        placeholder=""
-                    />
-                </div>
-            </fieldset>
+
+            <FormGroup>
+                <Label for='learnerId'>Learner</Label>
+                <Input
+                    type="select"
+                    onChange={handleLearnerSelection}
+                    required id="learnerId"
+                    invalid={learnerIdInvalid}>
+                    <option value="">Please select...</option>
+                    {learners.map((learner) => <option key={learner.id} value={learner.id}>{learner.fullName}</option>)}
+                </Input>
+            </FormGroup>
+
+
+            <FormGroup>
+                <label htmlFor="name">Behavior Name</label>
+                <Input
+                    type="text"
+                    id="name"
+                    innerRef={behaviorName}
+                    required
+                    autoFocus
+                    invalid={behaviorNameInvalid}
+                    className="form-control"
+                    placeholder=""
+                />
+                {behaviorNameInvalid ? <div className="behaviorInvalid">Behavior name must be 1-50 characters</div> : <div></div>}
+            </FormGroup>
+
 
             <fieldset className="text-right">
-                <button type="button" onClick={toggle} className="btn btn-secondary">Cancel</button>
-                <button type="submit"
+                <Button type="button" onClick={toggle} color="secondary">Cancel</Button>
+                <Button type="submit"
                     onClick={
                         evt => {
                             evt.preventDefault() // Prevent browser from submitting the form
                             addNewBehavior()
                         }
                     }
-                    className="btn btn-pri ml-2">
+                    color="primary">
                     Save
-            </button>
+            </Button>
             </fieldset>
         </Form>
     )

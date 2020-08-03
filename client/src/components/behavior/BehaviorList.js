@@ -20,7 +20,7 @@ const BehaviorList = () => {
 
     useEffect(() => {
         getBehaviorsByLearner()
-    });
+    }, []);
     return (
         <>
             <div className="container">

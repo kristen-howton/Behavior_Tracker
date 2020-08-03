@@ -1,15 +1,15 @@
 import React, { useState, useContext } from "react";
 import { UserProfileContext } from "./UserProfileProvider";
 
-export const BehaviorContext = React.createContext();
+export const ReportContext = React.createContext();
 
-export const BehaviorProvider = (props) => {
+export const ReportProvider = (props) => {
     const { getToken } = useContext(UserProfileContext)
-    const [behaviors, setBehaviors] = useState([]);
+    const [reports, setReports] = useState([]);
 
-    const apiUrl = '/api/behavior'
+    const apiUrl = '/api/report'
 
-    const getBehavior = (id) => {
+    const getReport = (id) => {
         return getToken().then((token) =>
             fetch(`${apiUrl}/${id}`, {
                 method: "GET",
@@ -17,10 +17,10 @@ export const BehaviorProvider = (props) => {
                     Authorization: `Bearer ${token}`
                 }
             }).then(resp => resp.json())
-                .then(setBehaviors));
+                .then(setReports));
     };
 
-    const getAllBehaviors = () => {
+    const getAllReports = () => {
         getToken().then((token) =>
             fetch(apiUrl, {
                 method: "GET",
@@ -28,10 +28,10 @@ export const BehaviorProvider = (props) => {
                     Authorization: `Bearer ${token}`
                 }
             }).then(resp => resp.json())
-                .then(setBehaviors));
+                .then(setReports));
     };
 
-    const addBehavior = (behavior) => {
+    const addReport = (report) => {
         return getToken().then((token) =>
             fetch(apiUrl, {
                 method: "POST",
@@ -39,7 +39,7 @@ export const BehaviorProvider = (props) => {
                     Authorization: `Bearer ${token}`,
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify(behavior)
+                body: JSON.stringify(report)
             }).then(resp => {
                 if (resp.ok) {
                     return resp.json();
@@ -48,10 +48,10 @@ export const BehaviorProvider = (props) => {
             }));
     };
 
-    const getBehaviorsByLearner = (id) => {
+    const getReportByLearner = (id) => {
         return getToken().then((token) => {
             if (id === null || id === "") {
-                setBehaviors([])
+                setReports([]);
             } else {
                 fetch(`${apiUrl}/bylearner/${id}`, {
                     method: "GET",
@@ -59,12 +59,12 @@ export const BehaviorProvider = (props) => {
                         Authorization: `Bearer ${token}`
                     }
                 }).then(resp => resp.json())
-                    .then(setBehaviors)
+                    .then(setReports)
             }
         });
     };
 
-    const editBehavior = (id, behavior) => {
+    const editReport = (id, report) => {
         return getToken().then((token) =>
             fetch(`${apiUrl}/${id}`, {
                 method: "PUT",
@@ -72,11 +72,11 @@ export const BehaviorProvider = (props) => {
                     Authorization: `Bearer ${token}`,
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify(behavior)
-            })).then(getBehaviorsByLearner);
+                body: JSON.stringify(report)
+            })).then(getReportByLearner);
     };
 
-    const deleteBehavior = (id) => {
+    const deleteReport = (id) => {
         return getToken().then((token) =>
             fetch(`${apiUrl}/${id}`, {
                 method: "DELETE",
@@ -84,16 +84,16 @@ export const BehaviorProvider = (props) => {
                     Authorization: `Bearer ${token}`,
                     "Content-Type": "application/json"
                 }
-            })).then(getBehaviorsByLearner);
+            })).then(getReportByLearner);
     };
 
     return (
-        <BehaviorContext.Provider value={{
-            behaviors, getAllBehaviors, addBehavior,
-            getBehaviorsByLearner, deleteBehavior,
-            editBehavior, getBehavior
+        <ReportContext.Provider value={{
+            reports, getAllReports, addReport,
+            getReportByLearner, deleteReport,
+            editReport, getReport
         }}>
             {props.children}
-        </BehaviorContext.Provider>
+        </ReportContext.Provider>
     );
 };

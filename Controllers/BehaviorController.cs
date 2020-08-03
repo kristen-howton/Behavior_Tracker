@@ -41,18 +41,15 @@ namespace BehaviorReport.Controllers
             return Ok(_behaviorRepository.GetAllBehaviors());
         }
 
-        [HttpGet("bylearner")]
-        public IActionResult GetByLearner()
+        [HttpGet("bylearner/{id}")]
+        public IActionResult GetByLearner(int id)
         {
-            var currentUserProfile = GetCurrentUserProfile();
-            return Ok(_behaviorRepository.GetAllBehaviorsByLearner(currentUserProfile.Id));
+            return Ok(_behaviorRepository.GetAllBehaviorsByLearner(id));
         }
 
         [HttpPost]
         public IActionResult Behavior(Behavior behavior)
         {
-            var currentUserProfile = GetCurrentUserProfile();
-            behavior.LearnerId = currentUserProfile.Id;
             _behaviorRepository.Add(behavior);
             return CreatedAtAction(nameof(Get), new { id = behavior.Id }, behavior);
         }
