@@ -73,7 +73,7 @@ export const BehaviorProvider = (props) => {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify(behavior)
-            })).then(getBehaviorsByLearner);
+            })).then(getAllBehaviors);
     };
 
     const deleteBehavior = (id) => {
@@ -84,7 +84,7 @@ export const BehaviorProvider = (props) => {
                     Authorization: `Bearer ${token}`,
                     "Content-Type": "application/json"
                 }
-            })).then(getBehaviorsByLearner);
+            })).then(getAllBehaviors);
     };
 
     return (
