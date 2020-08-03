@@ -16,13 +16,13 @@ export const LearnerForm = ({ toggle }) => {
             lastName: lastName.current.value
         }
 
-        if (!Learner.firstName.length) {
-            window.alert("Must add a first name for a learner.")
+        if (Learner.firstName.length < 1 || Learner.firstName.length > 50) {
+            window.alert("First name must be between 1-50 characters.")
             return
         }
 
-        if (!Learner.lastName.length) {
-            window.alert("Must add a last name for a learner.")
+        if (Learner.lastName.length < 1 || Learner.lastName.length > 50) {
+            window.alert("Last name must be between 1-50 characters.")
             return
         }
 
@@ -36,7 +36,7 @@ export const LearnerForm = ({ toggle }) => {
         <Form className="learnerForm">
             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="name">First Name</label>
+                    <label htmlFor="name" maxlength="50">First Name</label>
                     <input
                         type="text"
                         id="name"
@@ -50,7 +50,7 @@ export const LearnerForm = ({ toggle }) => {
             </fieldset>
             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="name">Last Name</label>
+                    <label htmlFor="name" maxlength="50">Last Name</label>
                     <input
                         type="text"
                         id="name"

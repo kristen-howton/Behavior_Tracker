@@ -3,38 +3,48 @@ import { Form, Button, FormGroup, Input, Label } from "reactstrap";
 import { useHistory } from 'react-router-dom';
 import { BehaviorContext } from "../../providers/BehaviorProvider";
 import { LearnerContext } from "../../providers/LearnerProvider";
+import "./Behavior"
+import "./Behavior.css"
 
 export const BehaviorForm = ({ toggle }) => {
     const { addBehavior, getBehaviorsByLearner } = useContext(BehaviorContext)
     const [learnerSelect, setLearnerSelection] = useState("");
+    const [behaviorNameInvalid, setBehaviorNameInvalid] = useState(false);
+    const [learnerIdInvalid, setLearnerIdInvalid] = useState(false);
     const { learners, getLeanersByUserProfile } = useContext(LearnerContext)
 
 
-    const behaviorName = useRef("behaviorName")
+    const behaviorName = useRef()
     const history = useHistory();
 
     useEffect(() => {
         getLeanersByUserProfile()
     }, [])
 
+    useEffect(() => {
+        setLearnerIdInvalid(false)
+    }, [learnerSelect])
+
     const handleLearnerSelection = (e) => {
         setLearnerSelection(e.target.value)
     }
 
     const addNewBehavior = () => {
+        setBehaviorNameInvalid(false)
+
 
         const Behavior = {
             behaviorName: behaviorName.current.value,
             learnerId: +learnerSelect
         }
 
-        if (!Behavior.behaviorName?.length) {
-            window.alert("Must add a behavior.")
+        if (!Behavior.learnerId) {
+            setLearnerIdInvalid(true)
             return
         }
 
-        if (!Behavior.learnerId) {
-            window.alert("Please select a learner.")
+        if (Behavior.behaviorName.length < 1 || Behavior.behaviorName.length > 50) {
+            setBehaviorNameInvalid(true)
             return
         }
 
@@ -50,7 +60,11 @@ export const BehaviorForm = ({ toggle }) => {
 
             <FormGroup>
                 <Label for='learnerId'>Learner</Label>
-                <Input type="select" onChange={handleLearnerSelection} required id="learnerId">
+                <Input
+                    type="select"
+                    onChange={handleLearnerSelection}
+                    required id="learnerId"
+                    invalid={learnerIdInvalid}>
                     <option value="">Please select...</option>
                     {learners.map((learner) => <option key={learner.id} value={learner.id}>{learner.fullName}</option>)}
                 </Input>
@@ -65,9 +79,11 @@ export const BehaviorForm = ({ toggle }) => {
                     innerRef={behaviorName}
                     required
                     autoFocus
+                    invalid={behaviorNameInvalid}
                     className="form-control"
                     placeholder=""
                 />
+                {behaviorNameInvalid ? <div className="behaviorInvalid">Behavior name must be 1-50 characters</div> : <div></div>}
             </FormGroup>
 
 

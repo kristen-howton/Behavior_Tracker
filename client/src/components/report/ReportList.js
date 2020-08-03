@@ -3,6 +3,7 @@ import { ReportContext } from '../../providers/ReportProvider';
 import Report from './Report';
 import { Table, FormGroup, Input, Label } from 'reactstrap';
 import { LearnerContext } from '../../providers/LearnerProvider';
+import "./Report.css";
 
 const ReportList = () => {
     const { reports, getReportByLearner } = useContext(ReportContext);
@@ -44,7 +45,7 @@ const ReportList = () => {
                     <div id="reportList" className="cards-column">
                         <Table bordered hover striped>
                             <thead>
-                                <tr>
+                                <tr class="title">
                                     <th>Date</th>
                                     <th>Name</th>
                                     <th>Activity</th>

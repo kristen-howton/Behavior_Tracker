@@ -58,6 +58,7 @@ namespace BehaviorReport.Controllers
             _activityRepository.Add(activity);
             return CreatedAtAction(nameof(Get), new { id = activity.Id }, activity);
         }
+
         [HttpPut("{id}")]
         public IActionResult Put(int id, Activity activity)
         {
@@ -71,12 +72,7 @@ namespace BehaviorReport.Controllers
 
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
-        {
-            List<Learner> LearnersToDelete = _learnerRepository.GetLearnerByUserProfile(id);
-            foreach (Learner learner in LearnersToDelete)
-            {
-                _learnerRepository.Delete(learner.Id);
-            }
+        { 
             _activityRepository.Delete(id);
             return NoContent();
         }

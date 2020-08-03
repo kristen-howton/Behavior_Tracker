@@ -50,7 +50,7 @@ export const ReportProvider = (props) => {
 
     const getReportByLearner = (id) => {
         return getToken().then((token) => {
-            if (id === null) {
+            if (id === null || id === "") {
                 setReports([]);
             } else {
                 fetch(`${apiUrl}/bylearner/${id}`, {

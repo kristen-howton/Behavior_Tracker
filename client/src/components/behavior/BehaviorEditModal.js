@@ -9,7 +9,14 @@ const BehaviorEditModal = ({ toggleEdit, behavior }) => {
     const behaviorName = useRef()
 
     const submitForm = (e) => {
+
         e.preventDefault();
+
+        if (behaviorName.current.value.length < 1 || behaviorName.current.value.length > 50) {
+            window.alert("Behavior name must be 1 to 50 characters.")
+            return
+        }
+
         editBehavior(
             behavior.id,
             {

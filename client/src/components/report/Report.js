@@ -1,4 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import "./Report"
 
 const Report = ({ report }) => {
 
@@ -11,10 +13,10 @@ const Report = ({ report }) => {
 
     return (
         <>
-            <tr>
+            <tr class="report">
                 <td>{dateFormat}</td>
                 <td>{report.learner?.fullName}</td>
-                <td>{report.activity?.activityName}</td>
+                <td><Link to={`/activityDetails/${report.activity?.id}`}>{report.activity?.activityName}</Link></td>
                 <td>{report.behavior?.behaviorName}</td>
                 <td>{report.consequence?.consequenceName}</td>
                 <td>{report.promptLevel?.prompt}</td>

@@ -11,6 +11,17 @@ const LearnerEditModal = ({ toggleEdit, learner }) => {
 
     const submitForm = (e) => {
         e.preventDefault();
+
+        if (firstName.current.value.length < 1 || firstName.current.value.length > 50) {
+            window.alert("First name must be 1 to 50 characters.")
+            return
+        }
+
+        if (lastName.current.value.length < 1 || lastName.current.value.length > 50) {
+            window.alert("Last name must be 1 to 50 characters.")
+            return
+        }
+
         editLearner(
             learner.id,
             {
@@ -28,12 +39,12 @@ const LearnerEditModal = ({ toggleEdit, learner }) => {
         <Form onSubmit={submitForm}>
             <FormGroup>
                 <Label for="firstName">First Name</Label>
-                <Input type="text" name="firstName" id="firstName" innerRef={firstName} defaultValue={learner.firstName} />
+                <Input type="text" name="firstName" id="firstName" innerRef={firstName} defaultValue={learner.firstName} maxlength="50" />
             </FormGroup>
 
             <FormGroup>
                 <Label for="activityName">Last Name</Label>
-                <Input type="text" name="learnerLastName" id="learnerLastName" innerRef={lastName} defaultValue={learner.lastName} />
+                <Input type="text" name="learnerLastName" id="learnerLastName" innerRef={lastName} defaultValue={learner.lastName} maxlength="50" />
             </FormGroup>
 
             <FormGroup className="text-right">

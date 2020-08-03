@@ -97,13 +97,13 @@ const ReportForm = () => {
             return
         }
 
-        if (!Report.activityId) {
-            window.alert("Please select an activity.")
+        if (!Report.learnerId) {
+            window.alert("Please select a learner.")
             return
         }
 
-        if (!Report.learnerId) {
-            window.alert("Please select a learner.")
+        if (!Report.activityId) {
+            window.alert("Please select an activity.")
             return
         }
 
@@ -112,8 +112,8 @@ const ReportForm = () => {
             return
         }
 
-        if (!Report.note.length) {
-            window.alert("Please add a note.")
+        if (!Report.promptLevelId) {
+            window.alert("Please select a prompt level.")
             return
         }
 
@@ -122,18 +122,19 @@ const ReportForm = () => {
             return
         }
 
-        if (!Report.promptLevelId) {
-            window.alert("Please select a prompt level.")
+        if (Report.note.length < 1 || Report.note.length > 500) {
+            window.alert("Report must be from 1-2000 characters.")
             return
         }
 
         addReport(Report)
             .then(() => history.push('/report'));
     }
+
     return (
-        <div className="d-flex justify-content-center">
+        <div className="d-flex justify-content-center test">
             <div className="smallContainer border rounded p-4">
-                <Form encType="multipart/form-data">
+                <Form encType="multipart/form-data" className="recordForm">
 
                     <FormGroup>
                         <Label for='Date'>Select Date</Label>
@@ -157,14 +158,14 @@ const ReportForm = () => {
                     </FormGroup>
 
                     <FormGroup>
-                        <Label for='behaviorId'>Behavior</Label>
+                        <Label for='behaviorId' >Behavior</Label>
                         {
                             learnerSelect != "" ?
                                 <Input type="select" onChange={handleBehaviorSelection} required id="behaviorId">
                                     <option value="">Please select...</option>
                                     {behaviors.map((behavior) => <option key={behavior.id} value={behavior.id}>{behavior.behaviorName}</option>)}
                                 </Input>
-                                : <div className="alert alert-secondary mt-1" role="alert">Please select a learner.</div>
+                                : <div className="alert alert-secondary mt-1 search" role="alert">Please select a learner.</div>
                         }
                         <div class="noBehaviorWarning">
                             {!behaviors.length && learnerSelect != ""
@@ -192,8 +193,8 @@ const ReportForm = () => {
 
                     <FormGroup>
                         <Label for="notes">Notes</Label>
-                        <Input type='textarea' name='Note' id='note' innerRef={note}
-                            placeholder='note' className='form-control'></Input>
+                        <Input type='textarea' name='Note' id='note' maxlength="500" innerRef={note}
+                            placeholder='note'></Input>
                     </FormGroup>
 
                     <div className='d-flex flex-row-reverse'>

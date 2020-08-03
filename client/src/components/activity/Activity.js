@@ -18,7 +18,7 @@ const Activity = ({ activity }) => {
         <>
             <Card className="d-flex justify-content-between card">
                 <CardBody className="name">{activity.activityName}</CardBody>
-                <Media object src={activity.imageUrl} className="imageSize" />
+                <Media object src={activity.imageUrl} />
                 <CardBody>{activity.description}</CardBody>
                 {activity.userProfileId === currentUserId ? (
                     <div>

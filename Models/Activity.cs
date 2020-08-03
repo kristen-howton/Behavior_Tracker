@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace BehaviorReport.Models
 {
+    //Represents template for an object that represents the table in database
     public class Activity
     {
         public int Id { get; set; }
