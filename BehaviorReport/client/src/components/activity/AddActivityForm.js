@@ -23,17 +23,17 @@ const AddActivityForm = () => {
             isDeleted: false
         }
 
-        if (Activity.activityName.length < 1 || Activity.activityName.length > 50) {
+        if (Activity.activityName?.length < 1 || Activity.activityName?.length > 50) {
             window.alert("Activity must be between 1-50 characters.")
             return
         }
 
-        if (Activity.imageUrl.length < 2000 || Activity.imageURl.length > 2000) {
+        if (Activity.imageUrl < 1 || Activity.imageURl > 2000) {
             window.alert("Opps, URL must be between 1-2000 characters")
             return
         }
 
-        if (Activity.description.length < 2000 || Activity.description.length > 2000) {
+        if (Activity.description?.length < 1 || Activity.description?.length > 2000) {
             window.alert("Description must be between 1-50 characters.")
             return
         }

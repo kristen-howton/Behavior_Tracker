@@ -7,7 +7,7 @@ import "./Behavior"
 import "./Behavior.css"
 
 export const BehaviorForm = ({ toggle }) => {
-    const { addBehavior, getBehaviorsByLearner } = useContext(BehaviorContext)
+    const { addBehavior, getAllBehaviors } = useContext(BehaviorContext)
     const [learnerSelect, setLearnerSelection] = useState("");
     const [behaviorNameInvalid, setBehaviorNameInvalid] = useState(false);
     const [learnerIdInvalid, setLearnerIdInvalid] = useState(false);
@@ -48,9 +48,13 @@ export const BehaviorForm = ({ toggle }) => {
             return
         }
 
+        if (learnerIdInvalid || behaviorNameInvalid) {
+
+        }
+
         addBehavior(Behavior)
             .then(toggle)
-            .then(getBehaviorsByLearner)
+            .then(getAllBehaviors)
             .then(history.push('/behavior'));
     }
 

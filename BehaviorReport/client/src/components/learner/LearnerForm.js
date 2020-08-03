@@ -16,12 +16,12 @@ export const LearnerForm = ({ toggle }) => {
             lastName: lastName.current.value
         }
 
-        if (Learner.firstName.length < 1 || Learner.firstName.length > 50) {
+        if (Learner.firstName?.length < 1 || Learner.firstName?.length > 50) {
             window.alert("First name must be between 1-50 characters.")
             return
         }
 
-        if (Learner.lastName.length < 1 || Learner.lastName.length > 50) {
+        if (Learner.lastName?.length < 1 || Learner.lastName?.length > 50) {
             window.alert("Last name must be between 1-50 characters.")
             return
         }
