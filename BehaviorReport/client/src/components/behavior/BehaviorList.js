@@ -6,7 +6,7 @@ import { BehaviorForm } from './AddBehaviorForm'
 
 
 const BehaviorList = () => {
-    const { behaviors, getBehaviorsByLearner } = useContext(BehaviorContext);
+    const { behaviors, getAllBehaviors } = useContext(BehaviorContext);
 
     const [modal, setModal] = useState(false)
     const toggle = () => setModal(!modal)
@@ -19,7 +19,7 @@ const BehaviorList = () => {
     }
 
     useEffect(() => {
-        getBehaviorsByLearner()
+        getAllBehaviors()
     }, []);
     return (
         <>
