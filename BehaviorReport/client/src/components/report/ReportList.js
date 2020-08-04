@@ -7,7 +7,7 @@ import "./Report.css";
 
 const ReportList = () => {
     const { reports, getReportByLearner } = useContext(ReportContext);
-    const { learners, getLeanersByUserProfile } = useContext(LearnerContext)
+    const { learners, getLearnersByUserProfile } = useContext(LearnerContext)
     const [id, setLearnerSelection] = useState(null);
 
     const renderListItem = (report) => {
@@ -23,7 +23,7 @@ const ReportList = () => {
     }, [id]);
 
     useEffect(() => {
-        getLeanersByUserProfile()
+        getLearnersByUserProfile()
     }, []);
 
     const handleLearnerSelection = (e) => {

@@ -48,7 +48,7 @@ export const LearnerProvider = (props) => {
             }));
     };
 
-    const getLeanersByUserProfile = () => {
+    const getLearnersByUserProfile = () => {
         return getToken().then((token) =>
             fetch(`${apiUrl}/byuser`, {
                 method: "GET",
@@ -85,7 +85,7 @@ export const LearnerProvider = (props) => {
     return (
         <LearnerContext.Provider value={{
             learners, getAllLearners, addLearner,
-            getLeanersByUserProfile, deleteLearner,
+            getLearnersByUserProfile, deleteLearner,
             editLearner, getLearner
         }}>
             {props.children}

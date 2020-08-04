@@ -12,7 +12,7 @@ import "./Report.css";
 const ReportForm = () => {
     const { addReport, getReportByLearner } = useContext(ReportContext)
     const { behaviors, getBehaviorsByLearner } = useContext(BehaviorContext)
-    const { learners, getLeanersByUserProfile } = useContext(LearnerContext)
+    const { learners, getLearnersByUserProfile } = useContext(LearnerContext)
     const { consequences, getAllConsequences } = useContext(ConsequenceContext)
     const { activities, getActivityByUserProfile } = useContext(ActivityContext)
     const { promptLevels, getAllPromptLevels } = useContext(PromptLevelContext)
@@ -35,22 +35,10 @@ const ReportForm = () => {
     }, [learnerSelect])
 
     useEffect(() => {
-        getLeanersByUserProfile()
-    }, [])
-
-    useEffect(() => {
+        getLearnersByUserProfile()
         getAllConsequences()
-    }, [])
-
-    useEffect(() => {
         getActivityByUserProfile()
-    }, [])
-
-    useEffect(() => {
         getAllPromptLevels()
-    }, [])
-
-    useEffect(() => {
         getReportByLearner(id)
     }, [])
 

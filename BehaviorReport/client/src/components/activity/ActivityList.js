@@ -24,7 +24,7 @@ const ActivityList = () => {
                             </ListGroupItem>
 
                         ))
-                        : <div className="alert alert-secondary mt-1" role="alert">There were no activities found.</div>
+                        : <div className="alert alert-secondary mt-1" role="alert">Hmmm, looks like you may want to add some activities.</div>
                 }
             </ListGroup>
 

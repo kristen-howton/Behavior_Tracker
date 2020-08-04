@@ -11,14 +11,14 @@ export const BehaviorForm = ({ toggle }) => {
     const [learnerSelect, setLearnerSelection] = useState("");
     const [behaviorNameInvalid, setBehaviorNameInvalid] = useState(false);
     const [learnerIdInvalid, setLearnerIdInvalid] = useState(false);
-    const { learners, getLeanersByUserProfile } = useContext(LearnerContext)
+    const { learners, getLearnersByUserProfile } = useContext(LearnerContext)
 
 
     const behaviorName = useRef()
     const history = useHistory();
 
     useEffect(() => {
-        getLeanersByUserProfile()
+        getLearnersByUserProfile()
     }, [])
 
 
@@ -49,10 +49,6 @@ export const BehaviorForm = ({ toggle }) => {
             return
         }
 
-        if (learnerIdInvalid || behaviorNameInvalid) {
-
-        }
-
         addBehavior(Behavior)
             .then(toggle)
             .then(getAllBehaviors)
@@ -77,7 +73,7 @@ export const BehaviorForm = ({ toggle }) => {
 
 
             <FormGroup>
-                <label htmlFor="name">Behavior Name</label>
+                <label htmlFor="name">Behavior</label>
                 <Input
                     type="text"
                     id="name"
@@ -88,7 +84,7 @@ export const BehaviorForm = ({ toggle }) => {
                     className="form-control"
                     placeholder=""
                 />
-                {behaviorNameInvalid ? <div className="behaviorInvalid">Behavior name must be 1-50 characters</div> : <div></div>}
+                {behaviorNameInvalid ? <div className="behaviorInvalid">Behaviors must be 1-50 characters</div> : <div></div>}
             </FormGroup>
 
 
