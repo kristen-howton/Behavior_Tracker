@@ -23,11 +23,12 @@ namespace BehaviorReport.Repositories
                             .FirstOrDefault(b => b.Id == id);
         }
 
-        public List<Behavior> GetAllBehaviors()
+        public List<Behavior> GetAllBehaviors(int id)
         {
             return _context.Behavior
                             .Where(b => !b.IsDeleted)
                             .Include(b => b.Learner)
+                            .Where(b => b.Learner.UserProfileId == id)
                             .ToList();
         }
 

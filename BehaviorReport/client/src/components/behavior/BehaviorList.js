@@ -3,10 +3,12 @@ import { Button, Modal, ModalHeader, ModalBody, ListGroup } from 'reactstrap';
 import { BehaviorContext } from '../../providers/BehaviorProvider';
 import Behavior from './Behavior';
 import { BehaviorForm } from './AddBehaviorForm'
+import { LearnerContext } from '../../providers/LearnerProvider';
 
 
 const BehaviorList = () => {
     const { behaviors, getAllBehaviors } = useContext(BehaviorContext);
+    const { getLearnersByUserProfile } = useContext(LearnerContext);
 
     const [modal, setModal] = useState(false)
     const toggle = () => setModal(!modal)
@@ -19,8 +21,13 @@ const BehaviorList = () => {
     }
 
     useEffect(() => {
+        getLearnersByUserProfile()
+    }, []);
+
+    useEffect(() => {
         getAllBehaviors()
     }, []);
+
     return (
         <>
             <div className="container">

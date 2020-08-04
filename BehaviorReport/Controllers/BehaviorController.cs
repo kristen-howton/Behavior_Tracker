@@ -38,7 +38,8 @@ namespace BehaviorReport.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok(_behaviorRepository.GetAllBehaviors());
+            var currentUserProfile = GetCurrentUserProfile();
+            return Ok(_behaviorRepository.GetAllBehaviors(currentUserProfile.Id));
         }
 
         [HttpGet("bylearner/{id}")]

@@ -34,7 +34,7 @@ const AddActivityForm = () => {
         }
 
         if (Activity.description?.length < 1 || Activity.description?.length > 2000) {
-            window.alert("Description must be between 1-50 characters.")
+            window.alert("Description must be between 1-2000 characters.")
             return
         }
 
@@ -63,7 +63,7 @@ const AddActivityForm = () => {
 
                     <FormGroup>
                         <Label for="activityDescription">Description</Label>
-                        <Input type='text-area' name='Description' id='activityDescription' maxlength="50" innerRef={description}
+                        <Input type='text-area' name='Description' id='activityDescription' maxlength="2000" innerRef={description}
                             placeholder='Activity'></Input>
                     </FormGroup>
 

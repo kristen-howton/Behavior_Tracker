@@ -14,7 +14,7 @@ const ActivityEditModal = ({ toggle, activity }) => {
         e.preventDefault();
 
         if (activityName.current.value.length < 1 || activityName.current.value.length > 50) {
-            window.alert("Activity name must be 1 to 50 characters.")
+            window.alert("Activities must be 1 to 50 characters.")
             return
         }
 
@@ -36,7 +36,7 @@ const ActivityEditModal = ({ toggle, activity }) => {
     return (
         <Form onSubmit={submitForm}>
             <FormGroup>
-                <Label for="activityName">Activity Name</Label>
+                <Label for="activityName">Activity</Label>
                 <Input type="text" name="activityName" id="activityName" maxlength="50" innerRef={activityName} defaultValue={activity.activityName} />
             </FormGroup>
 
