@@ -90,14 +90,14 @@ export const BehaviorForm = ({ toggle }) => {
 
             <fieldset className="text-right">
                 <Button type="button" onClick={toggle} color="secondary">Cancel</Button>
-                <Button type="submit"
+                <Button type="submit" className="ml-2"
                     onClick={
                         evt => {
                             evt.preventDefault() // Prevent browser from submitting the form
                             addNewBehavior()
                         }
                     }
-                    color="primary">
+                    color="primary" className="ml-2">
                     Save
             </Button>
             </fieldset>

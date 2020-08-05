@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom'
 import { LearnerContext } from "../../providers/LearnerProvider"
 
 export const LearnerForm = ({ toggle }) => {
-    const { addLearner, getLeanersByUserProfile } = useContext(LearnerContext)
+    const { addLearner, getAllLearners } = useContext(LearnerContext)
     const firstName = useRef("firstName")
     const lastName = useRef("lastName")
     const history = useHistory();
@@ -28,7 +28,7 @@ export const LearnerForm = ({ toggle }) => {
 
         addLearner(Learner)
             .then(toggle)
-            .then(getLeanersByUserProfile)
+            .then(getAllLearners)
             .then(history.push('/learner'));
     }
 
@@ -63,8 +63,8 @@ export const LearnerForm = ({ toggle }) => {
                 </div>
             </fieldset>
             <fieldset className="text-right">
-                <Button type="button" onClick={toggle} color="secondary">Cancel</Button>
-                <Button type="submit"
+                <Button type="button" onClick={toggle} color="secondary" className="ml-2" >Cancel</Button>
+                <Button type="submit" className="ml-2"
                     onClick={
                         evt => {
                             evt.preventDefault() // Prevent browser from submitting the form

@@ -48,12 +48,13 @@ export const ReportProvider = (props) => {
             }));
     };
 
-    const getReportByLearner = (id) => {
+    const getReportByLearner = (id, date) => {
         return getToken().then((token) => {
             if (id === null || id === "") {
                 setReports([]);
             } else {
-                fetch(`${apiUrl}/bylearner/${id}`, {
+                let url = date ? `${apiUrl}/bylearner/${id}?selectedDate=${date}` : `${apiUrl}/bylearner/${id}`
+                fetch(url, {
                     method: "GET",
                     headers: {
                         Authorization: `Bearer ${token}`

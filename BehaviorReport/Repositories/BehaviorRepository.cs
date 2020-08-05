@@ -29,6 +29,7 @@ namespace BehaviorReport.Repositories
                             .Where(b => !b.IsDeleted)
                             .Include(b => b.Learner)
                             .Where(b => b.Learner.UserProfileId == id)
+                            .OrderBy(b => b.Learner)
                             .ToList();
         }
 
@@ -38,6 +39,7 @@ namespace BehaviorReport.Repositories
                             .Include(b => b.Learner)
                             .Where(b => !b.IsDeleted)
                             .Where(b => b.LearnerId == id)
+                            .OrderBy(b => b.Learner)
                             .ToList();
         }
 

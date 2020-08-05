@@ -47,7 +47,7 @@ const BehaviorList = () => {
                 </div>
             </div>
             <Modal isOpen={modal} toggle={toggle} className="modal-md">
-                <ModalHeader toggle={toggle}>Add New Behavior</ModalHeader>
+                <ModalHeader toggle={toggle} className="add">Add New Behavior</ModalHeader>
                 <ModalBody>
                     <BehaviorForm toggle={toggle} />
                 </ModalBody>
