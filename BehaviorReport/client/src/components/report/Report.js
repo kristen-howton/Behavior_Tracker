@@ -1,8 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { Collapse, Button } from 'reactstrap';
+
 import "./Report"
 
 const Report = ({ report }) => {
+
+    const [openNote, setOpenNote] = useState(false)
+    const toggleOpenNote = () => setOpenNote(!openNote)
 
     let dateFormat
     if (report.date) {
@@ -20,8 +25,15 @@ const Report = ({ report }) => {
                 <td>{report.behavior?.behaviorName}</td>
                 <td>{report.consequence?.consequenceName}</td>
                 <td>{report.promptLevel?.prompt}</td>
-                <td>{report?.note}</td>
+                <td><Button onClick={toggleOpenNote}>View note</Button></td>
             </tr>
+            <Collapse className="wordBreak" isOpen={openNote}>
+
+                {report?.note}
+
+
+
+            </Collapse>
 
 
         </>

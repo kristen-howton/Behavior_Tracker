@@ -1,5 +1,6 @@
 ﻿using BehaviorReport.Data;
 using BehaviorReport.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -36,7 +37,20 @@ namespace BehaviorReport.Repositories
                             .ToList();
         }
 
-        public List<Report> GetReportByLearner(int id)
+        public List<Report> GetReportByLearnerWithDate(int id, DateTime? selectedDate = null)
+        {
+            return _context.Report
+                            .Include(r => r.Learner)
+                            .Include(r => r.Consequence)
+                            .Include(r => r.Activity)
+                            .Include(r => r.Behavior)
+                            .Include(r => r.PromptLevel)
+                            .Where(r => r.LearnerId == id && r.Date == selectedDate)
+                            .OrderByDescending(r => r.Date)
+                            .ToList();
+        }
+
+        public List<Report> GetReportByLearnerWithoutDate(int id)
         {
             return _context.Report
                             .Include(r => r.Learner)
@@ -45,6 +59,7 @@ namespace BehaviorReport.Repositories
                             .Include(r => r.Behavior)
                             .Include(r => r.PromptLevel)
                             .Where(r => r.LearnerId == id)
+                            .OrderByDescending(r => r.Date)
                             .ToList();
         }
         public void Add(Report report)

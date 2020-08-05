@@ -42,9 +42,13 @@ namespace BehaviorReport.Controllers
         }
 
         [HttpGet("bylearner/{id}")]
-        public IActionResult GetByLearner(int id)
+        public IActionResult GetByLearner(int id, DateTime? selectedDate = null)
         {
-            return Ok(_reportRepository.GetReportByLearner(id));
+            if (selectedDate == null)
+            {
+                return Ok(_reportRepository.GetReportByLearnerWithoutDate(id));
+            }
+            return Ok(_reportRepository.GetReportByLearnerWithDate(id, selectedDate));
         }
 
         [HttpPost]

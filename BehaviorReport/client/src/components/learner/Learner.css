@@ -1,12 +1,8 @@
-.behaviorForm {
+.add {
+    color:rgb(40, 104, 146);
     font-family: Arial, Helvetica, sans-serif;
 }
 
-.behaviorInvalid {
-    color: red;
-}
-
-.add {
-    color:rgb(40, 104, 146);
+.container {
     font-family: Arial, Helvetica, sans-serif;
 }

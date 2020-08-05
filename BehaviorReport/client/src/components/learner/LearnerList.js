@@ -3,6 +3,7 @@ import { Button, Modal, ModalHeader, ModalBody, ListGroup } from 'reactstrap';
 import { LearnerContext } from '../../providers/LearnerProvider';
 import { LearnerForm } from './LearnerForm';
 import Learner from './Learner';
+import "./Learner.css";
 
 const LearnerList = () => {
     const { learners, getLearnersByUserProfile } = useContext(LearnerContext);
@@ -40,7 +41,7 @@ const LearnerList = () => {
                 </div>
             </div>
             <Modal isOpen={modal} toggle={toggle} className="modal-md">
-                <ModalHeader toggle={toggle}>Create New Learner</ModalHeader>
+                <ModalHeader toggle={toggle} className="add">Create New Learner</ModalHeader>
                 <ModalBody>
                     <LearnerForm toggle={toggle} />
                 </ModalBody>

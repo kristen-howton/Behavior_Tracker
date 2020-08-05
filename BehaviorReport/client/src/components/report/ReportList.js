@@ -9,6 +9,7 @@ const ReportList = () => {
     const { reports, getReportByLearner } = useContext(ReportContext);
     const { learners, getLearnersByUserProfile } = useContext(LearnerContext)
     const [id, setLearnerSelection] = useState(null);
+    const [date, setDate] = useState(null)
 
     const renderListItem = (report) => {
         if (report.id > 0) {
@@ -19,8 +20,8 @@ const ReportList = () => {
     }
 
     useEffect(() => {
-        getReportByLearner(id)
-    }, [id]);
+        getReportByLearner(id, date)
+    }, [id, date]);
 
     useEffect(() => {
         getLearnersByUserProfile()
@@ -30,45 +31,56 @@ const ReportList = () => {
         setLearnerSelection(e.target.value)
     }
 
+    const handleDateChange = (e) => {
+        setDate(e.target.value)
+    }
+
     return (
         <>
-            <FormGroup>
-                <Label for='learnerId'>Select a learner</Label>
-                <Input type="select" onChange={handleLearnerSelection} required id="learnerId">
-                    <option value="">Please select...</option>
-                    {learners.map((learner) => <option key={learner.id} value={learner.id}>{learner.fullName}</option>)}
-                </Input>
-            </FormGroup>
+            <div class="reportSelections">
+                <FormGroup className="reportSelect">
+                    <Label for='learnerId'>Select a learner</Label>
+                    <Input type="select" onChange={handleLearnerSelection} required id="learnerId">
+                        <option value="">Please select...</option>
+                        {learners.map((learner) => <option key={learner.id} value={learner.id}>{learner.fullName}</option>)}
+                    </Input>
+                </FormGroup>
 
-            <div className="container">
-                <div className="row justify-content-center">
-                    <div id="reportList" className="cards-column">
-                        <Table bordered hover striped>
-                            <thead>
-                                <tr class="title">
-                                    <th>Date</th>
-                                    <th>Name</th>
-                                    <th>Activity</th>
-                                    <th>Behavior</th>
-                                    <th>Consequence</th>
-                                    <th>Level of Prompting</th>
-                                    <th>Notes</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <>
-                                    {
-                                        (reports.length)
-                                            ? reports.map((report) => (
-                                                renderListItem(report)
-                                            ))
-                                            : <div className="alert alert-secondary mt-1" role="alert">There were no reports found.</div>
-                                    }
-                                </>
-                            </tbody>
-                        </Table>
-                    </div>
-                </div>
+                <FormGroup className="reportSelect">
+                    <Label for='Date'>Select Date</Label>
+                    <Input type='date' required name='Date' id='date' onChange={handleDateChange} />
+                </FormGroup>
+
+            </div>
+
+
+            <div id="reportList" class="reportTable">
+                <Table bordered hover striped>
+                    <thead>
+                        <tr class="title">
+                            <th>Date</th>
+                            <th>Name</th>
+                            <th>Activity</th>
+                            <th>Behavior</th>
+                            <th>Consequence</th>
+                            <th>Level of Prompting</th>
+                            <th>Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <>
+                            {
+                                (reports.length)
+                                    ? reports.map((report) => (
+                                        renderListItem(report)
+                                    ))
+                                    : <tr>
+                                        <td colSpan="7" class="alert alert-secondary mt-1" role="alert">Hmmm, looks like you need to select a learner with some reports. You can narrow your search by selecting a date.</td>
+                                    </tr>
+                            }
+                        </>
+                    </tbody>
+                </Table>
             </div>
 
         </>

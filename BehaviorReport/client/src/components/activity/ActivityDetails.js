@@ -1,5 +1,5 @@
 import React, { useEffect, useContext, useState } from "react";
-import { Card, Media } from "reactstrap";
+import { Card, CardBody, CardImg, CardText, CardTitle } from "reactstrap";
 import { ActivityContext } from "../../providers/ActivityProvider";
 import { useParams } from "react-router-dom";
 
@@ -17,13 +17,17 @@ const ActivityDetails = () => {
 
     return (
         <>
-            <Card className="activity">
-                <h3>{activity?.activityName}</h3>
-                <Media object src={activity?.imageUrl} />
-                <div>{activity?.description}</div>
+            <Card className="activityCard">
+                <CardBody>
+                    <CardTitle className="name">{activity?.activityName}</CardTitle>
+                    <CardImg src={activity?.imageUrl} className="activityImage" />
+                    <CardText>{activity?.description}</CardText>
+                </CardBody>
             </Card>
         </>
     );
 };
 
 export default ActivityDetails;
+
+

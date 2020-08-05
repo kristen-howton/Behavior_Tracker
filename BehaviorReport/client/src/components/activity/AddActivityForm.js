@@ -47,7 +47,7 @@ const AddActivityForm = () => {
             <div className="smallContainer border rounded p-4">
                 <Form className="activity">
                     <h4>Add an Activity</h4>
-                    <hr />
+
                     <FormGroup>
                         <Label for="activityName" >Activity</Label>
                         <Input type='text' name='Title' id='activityName' innerRef={activityName}

@@ -1,5 +1,4 @@
 import React, { useContext, useEffect } from "react";
-import { ListGroup, ListGroupItem } from "reactstrap"
 import { ActivityContext } from "../../providers/ActivityProvider";
 import Activity from "./Activity";
 
@@ -15,18 +14,18 @@ const ActivityList = () => {
         <>
 
 
-            <ListGroup>
+            <article className="activityListContainer">
                 {
                     (activities.length)
                         ? activities.map((activity) => (
-                            <ListGroupItem key={activity.id}>
+                            <div class="activity" key={activity.id}>
                                 <Activity activity={activity} />
-                            </ListGroupItem>
+                            </div>
 
                         ))
                         : <div className="alert alert-secondary mt-1" role="alert">Hmmm, looks like you may want to add some activities.</div>
                 }
-            </ListGroup>
+            </article>
 
         </>
     );
