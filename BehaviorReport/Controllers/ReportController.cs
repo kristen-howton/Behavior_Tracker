@@ -54,8 +54,6 @@ namespace BehaviorReport.Controllers
         [HttpPost]
         public IActionResult Report(Report report)
         {
-            var currentUserProfile = GetCurrentUserProfile();
-            report.LearnerId = currentUserProfile.Id;
             _reportRepository.Add(report);
             return CreatedAtAction(nameof(Get), new { id = report.Id }, report);
         }

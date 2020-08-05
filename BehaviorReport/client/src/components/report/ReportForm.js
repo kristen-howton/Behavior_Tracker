@@ -73,7 +73,6 @@ const ReportForm = () => {
             activityId: +activitySelect,
             learnerId: +learnerSelect,
             behaviorId: +behaviorSelect,
-            behaviorId: +consequenceSelect,
             promptLevelId: +promptLevelSelect,
             note: note.current.value,
             date: date,
