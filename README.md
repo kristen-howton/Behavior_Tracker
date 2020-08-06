@@ -1,6 +1,6 @@
 ### Behavior Tracker
 
-Behavior Tracker is an Asp.Net web app with Entity Framework styled with a bootstrap theme with full CRUD functionality that allows users to track activities, behaviors of children that they work with, so that the user can share that information with parents.
+Behavior Tracker is an full stack application that was built using Asp.Net web app with Entity Framework for the server side and React and JavaScript. App was styled with a bootstrap theme with full CRUD functionality that allows users to track activities, behaviors of children that they work with, so that the user can share that information with parents.
 
 ### Installation
 In your terminal run git clone SSH KEY HERE
