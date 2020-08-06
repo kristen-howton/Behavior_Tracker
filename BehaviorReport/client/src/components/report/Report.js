@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Collapse, Button } from 'reactstrap';
-
 import "./Report"
 
 const Report = ({ report }) => {

@@ -18,6 +18,16 @@ const ActivityEditModal = ({ toggle, activity }) => {
             return
         }
 
+        if (imageUrl.current.value.length < 1 || imageUrl.current.value.length > 2000) {
+            window.alert("Image urls must be 1 to 2000 characters.")
+            return
+        }
+
+        if (description.current.value.length < 1 || description.current.value.length > 2000) {
+            window.alert("Descriptions must be 1 to 2000 characters.")
+            return
+        }
+
         editActivity(
             activity.id,
             {
@@ -49,7 +59,7 @@ const ActivityEditModal = ({ toggle, activity }) => {
 
             <FormGroup>
                 <Label for="activityDescription">Description</Label>
-                <Input type="text-area" name="activityName" id="activityName" maxlength="50" innerRef={description} defaultValue={activity.description} />
+                <Input type="textarea" name="activityName" id="activityName" maxlength="2000" innerRef={description} defaultValue={activity.description} />
             </FormGroup>
 
             <FormGroup className="text-right">
