@@ -63,6 +63,7 @@ CREATE TABLE [Learner] (
   [FirstName] varchar(50) NOT NULL,
   [LastName] varchar(50) NOT NULL,
   [UserProfileId] integer NOT NULL,
+  [IsDeleted] bit NOT NULL,
 CONSTRAINT [FK_Learner_UserProfile] FOREIGN KEY ([UserProfileId]) REFERENCES [UserProfile] ([Id])
 )
 GO

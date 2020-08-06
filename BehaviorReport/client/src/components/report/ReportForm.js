@@ -115,7 +115,7 @@ const ReportForm = () => {
         }
 
         addReport(Report)
-            .then(() => history.push('/report'));
+            .then(() => history.push('/'));
     }
 
     return (
