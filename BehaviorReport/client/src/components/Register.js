@@ -26,7 +26,7 @@ export default function Register() {
 
     return (
         <div className="d-flex justify-content-center">
-            <Card className="smallContainer">
+            <Card className="background">
                 <CardHeader>Register</CardHeader>
                 <CardBody>
                     <Form onSubmit={registerClick}>

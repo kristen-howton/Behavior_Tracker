@@ -54,7 +54,7 @@ const ReportList = () => {
             </div>
 
 
-            <div id="reportList" class="reportTable">
+            <div id="reportList" class="reportTable border-color">
                 <Table bordered hover striped>
                     <thead>
                         <tr class="title">

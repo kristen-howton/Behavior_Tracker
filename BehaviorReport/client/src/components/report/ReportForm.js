@@ -73,7 +73,6 @@ const ReportForm = () => {
             activityId: +activitySelect,
             learnerId: +learnerSelect,
             behaviorId: +behaviorSelect,
-            behaviorId: +consequenceSelect,
             promptLevelId: +promptLevelSelect,
             note: note.current.value,
             date: date,
@@ -121,7 +120,7 @@ const ReportForm = () => {
 
     return (
         <div className="d-flex justify-content-center test">
-            <div className="smallContainer border rounded p-4">
+            <div className="background">
                 <Form encType="multipart/form-data" className="recordForm">
 
                     <FormGroup>

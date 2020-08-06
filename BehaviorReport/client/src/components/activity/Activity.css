@@ -14,8 +14,8 @@
         font-family: Arial, Helvetica, sans-serif;
         font-size: 18px;
         height: 500px;
-        width: 500px;;
-        background-color: white;
+        width: 500px;
+        border: solid 1px !important;
 }
 
 .name {
@@ -39,6 +39,16 @@
     height: 200px;
     width: 200px;;
 }
+
+.background {
+    background-color: white;
+    border: solid rgb(40, 104, 146) 1px;
+    margin: 20px;
+    padding: 40px;
+    border-radius: 10px;
+}
+
+
 
 
 
