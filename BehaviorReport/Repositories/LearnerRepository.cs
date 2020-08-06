@@ -18,17 +18,20 @@ namespace BehaviorReport.Repositories
         public Learner GetLearnerById(int id)
         {
             return _context.Learner
+                            .Where(l => !l.IsDeleted)
                             .FirstOrDefault(l => l.Id == id);
         }
         public List<Learner> GetAllLeaners()
         {
             return _context.Learner
+                            .Where(l => !l.IsDeleted)
                             .Include(l => l.UserProfile)
                             .ToList();
         }
         public List<Learner> GetLearnerByUserProfile(int id)
         {
             return _context.Learner
+                            .Where(l => !l.IsDeleted)
                             .Include(l => l.UserProfile)
                             .Where(l => l.UserProfileId == id)
                             .ToList();
@@ -47,7 +50,8 @@ namespace BehaviorReport.Repositories
         public void Delete(int id)
         {
             var learner = GetLearnerById(id);
-            _context.Learner.Remove(learner);
+            learner.IsDeleted = true;
+            _context.Entry(learner).State = EntityState.Modified;
             _context.SaveChanges();
         }
     }

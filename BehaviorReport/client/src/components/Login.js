@@ -22,7 +22,7 @@ export default function Login() {
 
     return (
         <Form className="login" onSubmit={loginSubmit}>
-            <fieldset>
+            <fieldset class="loginForm">
                 <FormGroup>
                     <Label for="email">Email</Label>
                     <Input id="email" type="text" onChange={e => setEmail(e.target.value)} />

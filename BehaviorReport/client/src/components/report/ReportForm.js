@@ -120,7 +120,7 @@ const ReportForm = () => {
 
     return (
         <div className="d-flex justify-content-center test">
-            <div className="smallContainer border rounded p-4">
+            <div className="background">
                 <Form encType="multipart/form-data" className="recordForm">
 
                     <FormGroup>

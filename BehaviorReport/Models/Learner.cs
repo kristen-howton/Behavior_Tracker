@@ -21,6 +21,7 @@ namespace BehaviorReport.Models
         [Required]
         public int UserProfileId { get; set; }
         public UserProfile UserProfile { get; set; }
+        public bool IsDeleted { get; set; }
 
         public string FullName
         {

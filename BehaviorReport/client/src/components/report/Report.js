@@ -27,12 +27,8 @@ const Report = ({ report }) => {
                 <td>{report.promptLevel?.prompt}</td>
                 <td><Button onClick={toggleOpenNote}>View note</Button></td>
             </tr>
-            <Collapse className="wordBreak" isOpen={openNote}>
-
+            <Collapse className="wordBreak" colSpan="8" isOpen={openNote}>
                 {report?.note}
-
-
-
             </Collapse>
 
 

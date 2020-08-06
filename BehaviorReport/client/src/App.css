@@ -40,3 +40,22 @@
     transform: rotate(360deg);
   }
 }
+
+.loginForm {
+    margin-right: 100px;
+    padding: 40px;
+    border-radius: 10px;
+    color:rgb(40, 104, 146);
+    font-size: 22px;
+}
+
+.background {
+  background-color: white !important;
+  border: solid rgb(40, 104, 146) 1px  !important;
+  margin: 20px  !important;
+  padding: 40px  !important;
+  border-radius: 10px  !important;
+  color:  rgb(40, 104, 146);
+  text-align: left;
+}
+

@@ -43,10 +43,9 @@ const AddActivityForm = () => {
             .then(() => history.push('/'));
     }
     return (
-        <div className="d-flex justify-content-center activityForm">
-            <div className="smallContainer border rounded p-4">
+        <div className="d-flex justify-content-center">
+            <div className="background">
                 <Form className="activity">
-                    <h4>Add an Activity</h4>
 
                     <FormGroup>
                         <Label for="activityName" >Activity</Label>
