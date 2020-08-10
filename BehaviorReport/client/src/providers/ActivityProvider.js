@@ -83,9 +83,9 @@ export const ActivityProvider = (props) => {
 
     return (
         <ActivityContext.Provider value={{
-            activities, getAllActivities, addActivity,
-            getActivityByUserProfile, deleteActivity,
-            editActivity, getActivity
+            activities, setActivities, getAllActivities,
+            addActivity, getActivityByUserProfile,
+            deleteActivity, editActivity, getActivity
         }}>
             {props.children}
         </ActivityContext.Provider>

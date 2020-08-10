@@ -26,14 +26,16 @@ namespace BehaviorReport.Repositories
             return _context.Learner
                             .Where(l => !l.IsDeleted)
                             .Include(l => l.UserProfile)
+                            .OrderBy(l => l.FirstName)
                             .ToList();
         }
         public List<Learner> GetLearnerByUserProfile(int id)
         {
             return _context.Learner
-                            .Where(l => !l.IsDeleted)
                             .Include(l => l.UserProfile)
+                            .Where(l => !l.IsDeleted)
                             .Where(l => l.UserProfileId == id)
+                            .OrderBy(l => l.FirstName)
                             .ToList();
         }
         public void Add(Learner learner)

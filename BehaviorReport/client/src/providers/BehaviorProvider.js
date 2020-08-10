@@ -89,7 +89,7 @@ export const BehaviorProvider = (props) => {
 
     return (
         <BehaviorContext.Provider value={{
-            behaviors, getAllBehaviors, addBehavior,
+            behaviors, setBehaviors, getAllBehaviors, addBehavior,
             getBehaviorsByLearner, deleteBehavior,
             editBehavior, getBehavior
         }}>

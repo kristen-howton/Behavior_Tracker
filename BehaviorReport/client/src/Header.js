@@ -10,11 +10,25 @@ import {
     NavLink
 } from 'reactstrap';
 import { UserProfileContext } from "./providers/UserProfileProvider";
+import { ActivityContext } from './providers/ActivityProvider';
+import { LearnerContext } from './providers/LearnerProvider';
+import { BehaviorContext } from './providers/BehaviorProvider';
 
 export default function Header() {
+
     const { isLoggedIn, logout } = useContext(UserProfileContext);
+    const { setActivities } = useContext(ActivityContext);
+    const { setLearners } = useContext(LearnerContext);
+    const { setBehaviors } = useContext(BehaviorContext);
     const [isOpen, setIsOpen] = useState(false);
     const toggle = () => setIsOpen(!isOpen);
+
+    const internal_logout = () => {
+        logout()
+        setActivities([]);
+        setLearners([]);
+        setBehaviors([]);
+    }
 
     return (
         <div>
@@ -62,7 +76,7 @@ export default function Header() {
 
                     <NavItem>
                         <a aria-current="page" className="nav-link"
-                            style={{ cursor: "pointer" }} onClick={logout}>Logout</a>
+                            style={{ cursor: "pointer" }} onClick={internal_logout}>Logout</a>
                     </NavItem>
 
                 </Collapse>
