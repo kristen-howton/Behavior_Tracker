@@ -84,8 +84,8 @@ export const LearnerProvider = (props) => {
 
     return (
         <LearnerContext.Provider value={{
-            learners, getAllLearners, addLearner,
-            getLearnersByUserProfile, deleteLearner,
+            learners, setLearners, getAllLearners,
+            addLearner, getLearnersByUserProfile, deleteLearner,
             editLearner, getLearner
         }}>
             {props.children}

@@ -28,7 +28,7 @@ namespace BehaviorReport.Repositories
             return _context.Behavior
                             .Where(b => !b.IsDeleted)
                             .Include(b => b.Learner)
-                            .Where(b => b.Learner.UserProfileId == id)
+                            .Where(b => b.Learner.UserProfileId == id && !b.Learner.IsDeleted)
                             .OrderBy(b => b.Learner)
                             .ToList();
         }
